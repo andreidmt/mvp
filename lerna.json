@@ -8,7 +8,7 @@
     "version": {
       "allowBranch": "main",
       "conventionalCommits": true,
-      "message": "chore(release): publish %s"
+      "message": "chore(release): publish"
     },
     "publish": {
       "allowBranch": "main",
