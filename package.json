@@ -36,7 +36,7 @@
     "----DEVELOP": "",
     "start": "npm run start --workspace=@r3wy/react",
     "----BUNDLE": "",
-    "release": "semantic-release",
+    "release": "lerna publish --no-private --yes",
     "build": "npm run build --workspace=@r3wy/react"
   },
   "lint-staged": {

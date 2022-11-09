@@ -1,0 +1,200 @@
+# CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+
+version: 2.1
+
+# Executors - https://circleci.com/docs/2.0/executor-intro/
+#
+# The underlying technology or environment in which to run a job
+
+executors:
+  gitleaks:
+    docker:
+      - image: zricethezav/gitleaks:latest
+  aws:
+    docker:
+      - image: amazon/aws-cli:latest
+  node:
+    docker:
+      - image: cimg/node:16.18
+
+# Jobs - https://circleci.com/docs/2.0/configuration-reference/#jobs
+#
+# Atomic parts of the pipeline that will be composed and configured in one or
+# more Workflows
+
+jobs:
+  detect-secrets:
+    executor: gitleaks
+    working_directory: &JOB_WORKING_DIR "~/r3wy"
+    steps:
+      - checkout
+      - run:
+          name: "[gitleaks] Detect secrets in repository history"
+          command: |
+            gitleaks detect --redact --verbose
+      - persist_to_workspace:
+          root: &WORKSPACE_ROOT "~/"
+          paths:
+            - r3wy
+
+  setup:
+    executor: node
+    working_directory: *JOB_WORKING_DIR
+    steps:
+      - attach_workspace:
+          at: *WORKSPACE_ROOT
+      - restore_cache:
+          name: '[circleci] Restore cached "node_modules" folder'
+          key:
+            &CACHE_KEY_NODE_MODULES 'r3wy-v1-{{ arch }}-{{ checksum
+            "package-lock.json" }}'
+      - run:
+          name: "[npm]: Install packages"
+          command: |
+            node -v && npm -v && npm run setup
+      - save_cache:
+          paths:
+            - node_modules
+          key: *CACHE_KEY_NODE_MODULES
+      - persist_to_workspace:
+          root: *WORKSPACE_ROOT
+          paths:
+            - r3wy
+
+  test-unit:
+    executor: node
+    working_directory: *JOB_WORKING_DIR
+    steps:
+      - attach_workspace:
+          at: *WORKSPACE_ROOT
+      - run:
+          name: "[typescript]: Typecheck"
+          command: |
+            npm run typecheck
+      - run:
+          name: "[eslint, markdownlint]: Lint"
+          command: |
+            npm run lint
+      - run:
+          name: "[tape]: Unit tests"
+          command: "npm run test.unit"
+
+  test-e2e:
+    executor: node
+    working_directory: *JOB_WORKING_DIR
+    steps:
+      - attach_workspace:
+          at: *WORKSPACE_ROOT
+      - run:
+          name: "[cypress]: Test"
+          command: |
+            npm run test.e2e
+
+  submit-coverage:
+    executor: node
+    working_directory: *JOB_WORKING_DIR
+    steps:
+      - attach_workspace:
+          at: *WORKSPACE_ROOT
+      - run:
+          name: "[c8, coveralls]: Publish test coverage to Coveralls"
+          command: "npm run coverage"
+
+  release-npm:
+    executor: node
+    working_directory: *JOB_WORKING_DIR
+    steps:
+      - attach_workspace:
+          at: *WORKSPACE_ROOT
+      - run:
+          name:
+            "[lerna]: Update version, generate release, publish all non-private packages"
+          command: "npm run release"
+
+  build-react:
+    executor: node
+    working_directory: *JOB_WORKING_DIR
+    steps:
+      - attach_workspace:
+          at: *WORKSPACE_ROOT
+      - run:
+          name: "[webpack]: Compile application"
+          command: |
+            npm run build
+      - persist_to_workspace:
+          root: &WORKSPACE_ROOT "~/"
+          paths:
+            - r3wy
+
+  deploy-react:
+    executor: aws
+    working_directory: *JOB_WORKING_DIR
+    steps:
+      - run:
+          name: "[yum] Install packages missing in 'amazon/aws-cli' image"
+          command: |
+            # tar, gzip: required for unpacking workspace data
+            yum install -y tar gzip
+      - attach_workspace:
+          at: *WORKSPACE_ROOT
+      - run:
+          name: "[aws]: Upload compiled React App to S3"
+          command: |
+            # cache everything for 1 week, all assets have hashed names
+            aws s3 sync \
+              dist-react \
+              s3://${AWS_S3_BUCKET_NAME} \
+              --delete \
+              --cache-control "max-age=86400" \
+              --exclude index.html
+            # dont cache entry point
+            aws s3 sync \
+              dist-react \
+              s3://${AWS_S3_BUCKET_NAME} \
+              --cache-control "no-cache" \
+
+# Workflows - https://circleci.com/docs/2.0/workflows/
+#
+# Treat workflows as a jobs/commands pipe:
+# cmd1 -p1 lorem | cmd2 -foo bar | ... | cmdN)
+
+workflows:
+  release:
+    jobs:
+      - detect-secrets:
+          filters:
+            branches:
+              only: [main]
+      - setup:
+          requires: [detect-secrets]
+          context:
+            - "R3wy - GitHub"
+      - test-unit:
+          requires: [setup]
+      - submit-coverage:
+          requires: [test-unit]
+          context:
+            - "R3wy - Coveralls"
+      - release-npm:
+          requires: [test-unit]
+          context:
+            - "R3wy - GitHub"
+      - build-react:
+          requires: [release-npm]
+      - deploy-react:
+          requires: [build-react]
+          context:
+            - "R3wy - AWS @andreidmt"
+
+  test_pr-branches:
+    jobs:
+      - detect-secrets:
+          filters:
+            branches:
+              ignore: [main]
+      - setup:
+          requires: [detect-secrets]
+      - test-unit:
+          requires: [setup]
