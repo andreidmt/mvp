@@ -21,15 +21,18 @@
 
 ## Stack
 
-- [Cypress](https://www.cypress.io/) - Fast, easy and reliable testing for
-  anything that runs in a browser.
-- [Cucumber](https://github.com/TheBrainFamily/cypress-cucumber-preprocessor) -
-  Add support for
-  [Cucumber Gherkin syntax](https://cucumber.io/docs/gherkin/reference) when
-  writing Cypress tests.
-- [Cypress Testing Library](https://testing-library.com/docs/cypress-testing-library/intro) -
-  Cypress Testing Library allows the use of dom-testing queries within Cypress
-  end-to-end browser tests.
+- [Cypress][stack_cypress] - Fast, easy and reliable testing for anything that
+  runs in a browser.
+- [Cucumber][stack_cucumber] - Add support for [Cucumber Gherkin
+  syntax][stack_gherkin] when writing Cypress tests.
+- [Cypress Testing Library][stack_ctl] - Cypress Testing Library allows the use
+  of dom-testing queries within Cypress end-to-end browser tests.
+
+[stack_cypress]: https://www.cypress.io
+[stack_cucumber]:
+  https://github.com/TheBrainFamily/cypress-cucumber-preprocessor
+[stack_gherkin]: https://cucumber.io/docs/gherkin/reference
+[stack_ctl]: https://testing-library.com/docs/cypress-testing-library/intro
 
 ## Folder structure
 
@@ -45,19 +48,22 @@
 ### Local
 
 Copy and rename `.env.template` to `.env`. Variables get picked up by
-[`cypress-dotenv`](https://github.com/morficus/cypress-dotenv).
+[`cypress-dotenv`][local_cypress-dotenv].
+
+[local_cypress-dotenv]: https://github.com/morficus/cypress-dotenv
 
 ### CI
 
 CircleCI secrets are split into reusable/composable "buckets" called
 [Contexts](https://circleci.com/docs/2.0/contexts/):
 
-- [R3wy - Cypress @andreidmt]() -
-  passed from
-  [`release_development`]()
-  workflow to
-  [`test-e2e`]()
-  job
+- [R3wy - Cypress @andreidmt][ci_andreidmt-bucket] - passed from
+  [`release_development`][ci_release-worflow] workflow to
+  [`test-e2e`][ci_test-e2e-job] job
+
+[ci_andreidmt-bucket]: https://circleci.com
+[ci_release-worflow]: /.circleci/config.xml#L100
+[ci_test-e2e-job]: /.circleci/config.xml#L100
 
 ## Scripts
 
