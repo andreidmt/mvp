@@ -1,5 +1,5 @@
 {
-  "include": ["src", "*.config.js", "*.setup.js"],
+  "include": ["src", "jest.config.js", "jest.setup.js"],
   "exclude": ["**/node_modules"],
   "compilerOptions": {
     "baseUrl": "./src",
@@ -17,7 +17,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noPropertyAccessFromIndexSignature": true,
-    "useDefineForClassFields": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
