@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/andreidmt/mvp.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "index.json",
   "scripts": {}
 }
