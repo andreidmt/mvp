@@ -3,8 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["./common.js", "plugin:react-hooks/recommended"],
-  plugins: ["react", "testing-library"],
+  extends: [
+    "./common.js",
+    "plugin:react-hooks/recommended",
+    "plugin:jest/recommended",
+  ],
+  plugins: ["react", "testing-library", "jest"],
   rules: {
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "error",
@@ -16,6 +20,23 @@ module.exports = {
       {
         namedComponents: "arrow-function",
         unnamedComponents: "arrow-function",
+      },
+    ],
+
+    "jest/require-top-level-describe": "error",
+    "jest/consistent-test-it": [
+      "error",
+      {
+        fn: "test",
+        withinDescribe: "test",
+      },
+    ],
+    "jest/valid-title": [
+      "error",
+      {
+        mustMatch: {
+          test: "^given \\[.*\\] should \\[.*\\]$",
+        },
       },
     ],
   },
