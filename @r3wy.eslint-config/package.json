@@ -14,15 +14,15 @@
     "format": "eslint --fix .",
     "----LINT": "",
     "lint.js": "eslint --quiet .",
-    "lint.md": "markdownlint '*.md'",
+    "lint.md": "markdownlint '*.md' --ignore CHANGELOG.md",
     "lint": "npm run lint.js && npm run lint.md"
   },
   "lint-staged": {
     "*.js": [
       "eslint --quiet"
     ],
-    ".md": [
-      "markdownlint"
+    "*.md": [
+      "markdownlint --ignore CHANGELOG.md"
     ]
   },
   "dependencies": {

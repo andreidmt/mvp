@@ -8,7 +8,7 @@
     "format": "eslint --fix .",
     "----LINT": "",
     "lint.js": "eslint --quiet .",
-    "lint.md": "markdownlint '*.md' 'src/**/*.md'",
+    "lint.md": "markdownlint '*.md' 'src/**/*.md' --ignore CHANGELOG.md",
     "lint": "npm run lint.js && npm run lint.md",
     "typecheck": "tsc --pretty --noEmit",
     "----TEST": "",
@@ -26,8 +26,8 @@
     "*.{ts,tsx}": [
       "eslint --quiet"
     ],
-    ".md": [
-      "markdownlint"
+    "*.md": [
+      "markdownlint --ignore CHANGELOG.md"
     ]
   },
   "dependencies": {
