@@ -8,6 +8,9 @@
     "type": "git",
     "url": "git+https://github.com/andreidmt/mvp.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "bugs": {
     "url": "https://github.com/andreidmt/mvp/issues"
   },
