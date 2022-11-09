@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["@revy/eslint-config/targets/react"],
+  "extends": ["@r3wy/eslint-config/targets/react"],
   "parserOptions": {
     "project": "./tsconfig.json",
     "ecmaFeatures": {

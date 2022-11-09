@@ -1,11 +1,11 @@
 {
   "name": "@r3wy/prettier-config",
   "version": "1.2.1",
-  "description": "Revy's Prettier config",
+  "description": "R3wy's Prettier config",
   "author": "Andrei Dumitrescu <andrei.dumitrescu@pm.me>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andreidmt/mvp.git"
+    "url": "git+https://github.com/r3wy/r3wy.git"
   },
   "publishConfig": {
     "access": "public"

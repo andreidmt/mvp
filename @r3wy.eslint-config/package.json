@@ -1,10 +1,10 @@
 {
   "name": "@r3wy/eslint-config",
   "version": "1.2.1",
-  "description": "Revy's ESLint configuration",
+  "description": "R3wy's ESLint configuration",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andreidmt/mvp.git"
+    "url": "git+https://github.com/r3wy/r3wy.git"
   },
   "publishConfig": {
     "access": "public"

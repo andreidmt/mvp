@@ -1,1 +1,0 @@
-# Revy's React frontend

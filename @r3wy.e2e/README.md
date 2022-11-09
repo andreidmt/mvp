@@ -1,4 +1,4 @@
-# Revy's Cypress E2E tests
+# R3wy's Cypress E2E tests
 
 > The more your tests resemble the way your software is used, the more
 > confidence they can give you.  
@@ -52,7 +52,7 @@ Copy and rename `.env.template` to `.env`. Variables get picked up by
 CircleCI secrets are split into reusable/composable "buckets" called
 [Contexts](https://circleci.com/docs/2.0/contexts/):
 
-- [Revy - Cypress @andreidmt]() -
+- [R3wy - Cypress @andreidmt]() -
   passed from
   [`release_development`]()
   workflow to

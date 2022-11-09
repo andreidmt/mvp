@@ -1,7 +1,7 @@
 {
   "name": "@r3wy/core",
   "version": "1.0.0",
-  "description": "Revy's core with domain specific data",
+  "description": "R3wy's core with domain specific data",
   "private": true,
   "scripts": {
   }

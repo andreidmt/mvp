@@ -1,24 +1,24 @@
 {
   "name": "@r3wy/r3wy",
   "version": "1.0.0",
-  "description": "Revy",
+  "description": "R3wy",
   "private": true,
-  "homepage": "https://github.com/andreidmt/mvp",
+  "homepage": "https://github.com/r3wy/r3wy",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andreidmt/mvp.git"
+    "url": "git+https://github.com/r3wy/r3wy.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
   "bugs": {
-    "url": "https://github.com/andreidmt/mvp/issues"
+    "url": "https://github.com/r3wy/r3wy/issues"
   },
   "contributors": [
     "Andrei Dumitrescu <andrei.dumitrescu@pm.me>"
   ],
   "workspaces": [
-    "@revy.*"
+    "@r3wy.*"
   ],
   "scripts": {
     "----UTIL": "",
@@ -30,14 +30,14 @@
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "----TEST": "",
-    "test.unit": "npm run test --workspace=@revy/react",
-    "test.e2e": "npm run test --workspace=@revy/e2e",
-    "coverage": "npm run coverage --workspace=@revy/react",
+    "test.unit": "npm run test --workspace=@r3wy/react",
+    "test.e2e": "npm run test --workspace=@r3wy/e2e",
+    "coverage": "npm run coverage --workspace=@r3wy/react",
     "----DEVELOP": "",
-    "start": "npm run start --workspace=@revy/react",
+    "start": "npm run start --workspace=@r3wy/react",
     "----BUNDLE": "",
     "release": "semantic-release",
-    "build": "npm run build --workspace=@revy/react"
+    "build": "npm run build --workspace=@r3wy/react"
   },
   "lint-staged": {
     ".md": [

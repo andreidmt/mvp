@@ -9,7 +9,7 @@ import { AuthProvider } from "core.hooks/use-auth"
 import { AppRoutes } from "./index.routes"
 
 if (process.env["NODE_ENV"] !== "production") {
-  debug.enable("@revy*")
+  debug.enable("@r3wy*")
 }
 
 const reactDomElm = document.getElementById("react-root")
@@ -17,7 +17,7 @@ const reactRoot = createRoot(reactDomElm!)
 
 reactRoot.render(
   <>
-    <Helmet titleTemplate="%s | Revy" defaultTitle="Revy" />
+    <Helmet titleTemplate="%s | R3wy" defaultTitle="R3wy" />
 
     <BrowserRouter>
       <AuthProvider>

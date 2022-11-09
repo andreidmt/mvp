@@ -25,8 +25,8 @@ module.exports = {
           [
             "jest-junit",
             {
-              suiteName: "Unit tests - @revy/react",
-              outputDirectory: "./test_reports/revy_unit_tests",
+              suiteName: "Unit tests - @r3wy/react",
+              outputDirectory: "./test_reports/r3wy_unit_tests",
               outputName: "junit.xml",
             },
           ],

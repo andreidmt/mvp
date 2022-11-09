@@ -1,7 +1,7 @@
 {
   "name": "@r3wy/react",
   "version": "1.0.0",
-  "description": "Revy's React frontend",
+  "description": "R3wy's React frontend",
   "private": true,
   "scripts": {
     "----UTIL": "",
