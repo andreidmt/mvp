@@ -1,5 +1,5 @@
 {
-  "name": "@revy/e2e",
+  "name": "@r3wy/e2e",
   "version": "1.0.0",
   "description": "Revy's Cypress E2E tests",
   "private": true,
