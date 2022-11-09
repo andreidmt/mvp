@@ -1,6 +1,6 @@
 {
   "name": "@r3wy/eslint-config",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Revy's ESLint configuration",
   "repository": {
     "type": "git",
