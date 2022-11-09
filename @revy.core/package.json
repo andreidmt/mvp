@@ -1,0 +1,8 @@
+{
+  "name": "@revy/core",
+  "version": "1.0.0",
+  "description": "Revy's core with domain specific data",
+  "private": true,
+  "scripts": {
+  }
+}

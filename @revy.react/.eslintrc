@@ -1,0 +1,25 @@
+{
+  "root": true,
+  "extends": ["@revy/eslint-config/targets/react"],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.+(test|test-mock).+(ts|tsx)",
+          "src/core.libs/rtl.tsx",
+          "webpack.config.js",
+          "jest.*.js"
+        ]
+      }
+    ]
+  }
+}

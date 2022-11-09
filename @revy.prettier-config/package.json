@@ -1,0 +1,12 @@
+{
+  "name": "@revy/prettier-config",
+  "version": "1.0.0",
+  "description": "Revy's Prettier config",
+  "author": "Andrei Dumitrescu <andrei.dumitrescu@pm.me>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreidmt/mvp.git"
+  },
+  "main": "index.json",
+  "scripts": {}
+}

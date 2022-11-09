@@ -1,0 +1,23 @@
+{
+  "minify": false,
+  "sourceMaps": true,
+  "env": {
+    "mode": "entry",
+    "coreJs": 3
+  },
+  "jsc": {
+    "externalHelpers": true,
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true,
+      "dynamicImport": true
+    },
+    "transform": {
+      "react": {
+        // Together with ESLint's "react/react-in-jsx-scope" rule allows
+        // to use JSX without importing React in every file
+        "runtime": "automatic"
+      }
+    }
+  }
+}
