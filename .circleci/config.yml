@@ -105,8 +105,6 @@ jobs:
   release-npm:
     executor: node
     working_directory: *JOB_WORKING_DIR
-    environment:
-      NPM_TOKEN: $GITHUB_TOKEN
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -118,6 +116,10 @@ jobs:
           command: |
             mkdir -p ~/.ssh/
             echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+      - run:
+          name: "[bash] Set NPM TOKEN in .npmrc"
+          command: |
+            echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" > ../.npmrc
       - run:
           name:
             "[lerna]: Update version, generate release, publish all non-private packages"
