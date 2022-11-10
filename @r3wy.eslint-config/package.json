@@ -1,7 +1,7 @@
 {
   "name": "@r3wy/eslint-config",
   "version": "1.3.2",
-  "description": "R3wy's ESLint configuration",
+  "description": "R3wy's ESLint config",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/r3wy/r3wy.git"
