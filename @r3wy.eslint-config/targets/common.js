@@ -8,6 +8,10 @@ module.exports = {
   rules: {
     "prettier/prettier": "error",
 
+    // let "tsc" catch these when doing type checking as this rule currently
+    // gives false positives for variables starting with an underscore
+    "@typescript-eslint/no-unused-vars": "off",
+
     "@typescript-eslint/no-use-before-define": "error",
     "@typescript-eslint/naming-convention": [
       "error",
