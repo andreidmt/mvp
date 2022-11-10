@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0](https://github.com/r3wy/r3wy/compare/@r3wy/prettier-config@1.3.0...@r3wy/prettier-config@1.4.0) (2022-11-10)
+
+### Features
+
+- update README ([68e8d3d](https://github.com/r3wy/r3wy/commit/68e8d3d93cc64e12d4a4469b398bf40bb5be35aa))
+
 ## [1.3.0](https://github.com/r3wy/r3wy/compare/@r3wy/prettier-config@1.2.5...@r3wy/prettier-config@1.3.0) (2022-11-10)
 
 ### Features

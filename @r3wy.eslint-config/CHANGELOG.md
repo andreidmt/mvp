@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0](https://github.com/r3wy/r3wy/compare/@r3wy/eslint-config@1.4.0...@r3wy/eslint-config@1.5.0) (2022-11-10)
+
+### Features
+
+- update README
+  ([7bff940](https://github.com/r3wy/r3wy/commit/7bff940ddb324c68fe00dcd9f849637a153c9fe6))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.4.0](https://github.com/r3wy/r3wy/compare/@r3wy/eslint-config@1.3.2...@r3wy/eslint-config@1.4.0) (2022-11-10)
 
 ### Features
