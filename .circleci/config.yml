@@ -51,6 +51,10 @@ jobs:
             &CACHE_KEY_NODE_MODULES 'r3wy-v1-{{ arch }}-{{ checksum
             "package-lock.json" }}'
       - run:
+          name: "[bash] Set NPM_TOKEN in .npmrc"
+          command: |
+            echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" >> .npmrc
+      - run:
           name: "[npm]: Install packages"
           command: |
             node -v && npm -v && npm run setup
@@ -120,6 +124,10 @@ jobs:
           name:
             "[lerna]: Update version, generate release, publish all non-private packages"
           command: "npm run release"
+      - persist_to_workspace:
+          root: *WORKSPACE_ROOT
+          paths:
+            - r3wy
 
   build-react:
     executor: node
