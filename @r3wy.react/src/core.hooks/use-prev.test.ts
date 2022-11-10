@@ -3,7 +3,7 @@ import { renderHook } from "@testing-library/react"
 import { usePrev } from "core.hooks/use-prev"
 
 describe("usePrev", () => {
-  test("should always return value from previous render", () => {
+  test("given [multiple component renders] should [always return value from previous render]", () => {
     const { result, rerender } = renderHook(
       ({ increment }) => usePrev(42 + increment),
       {

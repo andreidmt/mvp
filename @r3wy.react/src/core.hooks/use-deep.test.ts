@@ -3,30 +3,33 @@ import { renderHook } from "@testing-library/react"
 import { useMemo, useCallback, useEffect } from "core.hooks/use-deep"
 
 describe("useMemo with deep equality check", () => {
-  test("should return same value if no structural change in dependency array", () => {
+  test("given [different objects with same shape] should [not trigger memo function and return the initial value]", () => {
     const user = { locale: "en-US" }
     const { result, rerender } = renderHook(
       props => useMemo(() => props.user, [props]),
-      {
-        initialProps: { user },
-      }
+      { initialProps: { user } }
     )
 
-    // initial render should return passed props
     expect(result.current).toBe(user)
 
-    // rerender with same props should return same object as initial render
     rerender({ user: { locale: "en-US" } })
     expect(result.current).toBe(user)
+  })
 
-    // rerender with different props should return updated object
+  test("given [different objects with different shape] should [trigger memo function and return the new value]", () => {
+    const user = { locale: "en-US" }
+    const { result, rerender } = renderHook(
+      props => useMemo(() => props.user, [props]),
+      { initialProps: { user } }
+    )
+
     rerender({ user: { locale: "nl-NL" } })
     expect(result.current).toStrictEqual({ locale: "nl-NL" })
   })
 })
 
 describe("useCallback with deep equality check", () => {
-  test("should return same handler if no structural change in dependency array", () => {
+  test("given [different objects with same shape] should [not trigger hook and return the initial handler]", () => {
     const { result, rerender } = renderHook(
       props => useCallback(() => props, [props]),
       {
@@ -35,15 +38,22 @@ describe("useCallback with deep equality check", () => {
     )
     const initialRenderMemoizedHandler = result.current
 
-    // initial render should return handler function
     expect(result.current()).toStrictEqual({ user: { locale: "en-US" } })
 
-    // rerender with same props should return same handler as initial render
     rerender({ user: { locale: "en-US" } })
     expect(result.current).toBe(initialRenderMemoizedHandler)
     expect(result.current()).toStrictEqual({ user: { locale: "en-US" } })
+  })
 
-    // rerender with different props should return new handlers
+  test("given [different objects with different shape] should [trigger callback hook and return a new handler]", () => {
+    const { result, rerender } = renderHook(
+      props => useCallback(() => props, [props]),
+      {
+        initialProps: { user: { locale: "en-US" } },
+      }
+    )
+    const initialRenderMemoizedHandler = result.current
+
     rerender({ user: { locale: "nl-NL" } })
     expect(result.current).not.toBe(initialRenderMemoizedHandler)
     expect(result.current()).toStrictEqual({ user: { locale: "nl-NL" } })
@@ -51,7 +61,7 @@ describe("useCallback with deep equality check", () => {
 })
 
 describe("useEffect with deep equality check", () => {
-  test("should run once per structural change in dependency array", () => {
+  test("given [different objects with same shape in dependency array] should [not retrigger the hook]", () => {
     let count = 0
     const { rerender } = renderHook(
       props => {
@@ -64,14 +74,27 @@ describe("useEffect with deep equality check", () => {
       }
     )
 
-    // initial render should run effect
     expect(count).toEqual(1)
 
-    // rerender with same props should not re-run effect
     rerender({ user: { locale: "en-US" } })
     expect(count).toEqual(1)
+  })
 
-    // rerender with different props should re-run effect
+  test("given [different objects with different shape in dependency array] should [retrigger the hook]", () => {
+    let count = 0
+    const { rerender } = renderHook(
+      props => {
+        useEffect(() => {
+          count += 1
+        }, [props])
+      },
+      {
+        initialProps: { user: { locale: "en-US" } },
+      }
+    )
+
+    expect(count).toEqual(1)
+
     rerender({ user: { locale: "nl-NL" } })
     expect(count).toEqual(2)
   })
