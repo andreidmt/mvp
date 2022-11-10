@@ -1,1 +1,1 @@
-# R3wy's Prettier config
+# R3wy's Prettier configuration
