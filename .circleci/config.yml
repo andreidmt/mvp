@@ -51,10 +51,6 @@ jobs:
             &CACHE_KEY_NODE_MODULES 'r3wy-v1-{{ arch }}-{{ checksum
             "package-lock.json" }}'
       - run:
-          name: "[bash] Set NPM_TOKEN in .npmrc"
-          command: |
-            echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" >> .npmrc
-      - run:
           name: "[npm]: Install packages"
           command: |
             node -v && npm -v && npm run setup
@@ -109,6 +105,8 @@ jobs:
   release-npm:
     executor: node
     working_directory: *JOB_WORKING_DIR
+    environment:
+      NPM_TOKEN: $GITHUB_TOKEN
     steps:
       - add_ssh_keys:
           fingerprints:
