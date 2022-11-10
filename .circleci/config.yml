@@ -78,7 +78,7 @@ jobs:
           command: |
             npm run lint
       - run:
-          name: "[tape]: Unit tests"
+          name: "[jest]: Unit test"
           command: "npm run test.unit"
 
   test-e2e:
@@ -106,6 +106,9 @@ jobs:
     executor: node
     working_directory: *JOB_WORKING_DIR
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "3d:95:f2:a8:82:7f:60:b8:39:05:52:4f:58:52:d7:d4"
       - attach_workspace:
           at: *WORKSPACE_ROOT
       - run:
