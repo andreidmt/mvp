@@ -40,8 +40,8 @@
     "build": "npm run build --workspace=@r3wy/react"
   },
   "lint-staged": {
-    "*.md": [
-      "markdownlint --ignore CHANGELOG.md"
+    "!(*CHANGELOG).md": [
+      "markdownlint"
     ]
   },
   "devDependencies": {

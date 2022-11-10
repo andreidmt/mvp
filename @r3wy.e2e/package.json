@@ -21,9 +21,6 @@
   "lint-staged": {
     "*.feature": [
       "gherkin-lint"
-    ],
-    "*.md": [
-      "markdownlint --ignore CHANGELOG.md"
     ]
   },
   "dependencies": {

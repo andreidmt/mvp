@@ -20,9 +20,6 @@
   "lint-staged": {
     "*.js": [
       "eslint --quiet"
-    ],
-    "*.md": [
-      "markdownlint --ignore CHANGELOG.md"
     ]
   },
   "dependencies": {
