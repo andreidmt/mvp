@@ -13,6 +13,7 @@ module.exports = {
       "error",
       {
         selector: "default",
+        leadingUnderscore: "allow",
         format: ["camelCase", "PascalCase", "UPPER_CASE"],
       },
       {
