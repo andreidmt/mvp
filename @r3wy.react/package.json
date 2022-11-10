@@ -54,6 +54,8 @@
   "devDependencies": {
     "@emotion/jest": "^11.10.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.8",
+    "@r3wy/eslint-config": "^1.2.2",
+    "@r3wy/prettier-config": "^1.2.2",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

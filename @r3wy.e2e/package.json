@@ -35,6 +35,8 @@
     "rambda": "^7.3.0"
   },
   "devDependencies": {
+    "@r3wy/eslint-config": "^1.2.2",
+    "@r3wy/prettier-config": "^1.2.2",
     "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/cypress-dotenv": "^2.0.0",
     "gherkin-lint": "^4.2.2",

@@ -17,7 +17,8 @@
           "**/*.+(test|test-mock).+(ts|tsx)",
           "src/core.libs/rtl.tsx",
           "webpack.config.js",
-          "jest.*.js"
+          "jest.config.js",
+          "jest.setup.js"
         ]
       }
     ]
