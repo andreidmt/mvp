@@ -11,6 +11,7 @@
     "lint.md": "markdownlint '*.md' --ignore CHANGELOG.md",
     "lint.cucumber": "gherkin-lint src/**/*.feature",
     "lint": "npm run lint.cucumber && npm run lint.js && npm run lint.md",
+    "typecheck": "tsc --pretty --noEmit",
     "----DEVELOP": "",
     "start": "cypress open",
     "----TEST": "",

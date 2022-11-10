@@ -1,6 +1,14 @@
+/** @typedef {import('webpack').Configuration} Configuration */
+
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
-module.exports = {
+/**
+ * @param {Record<string, string>} _env
+ * @param {Record<string, any>} _props
+ *
+ * @returns {Configuration}
+ */
+module.exports = (_env, _props) => ({
   resolve: {
     extensions: [".ts", ".js"],
   },
@@ -32,4 +40,4 @@ module.exports = {
       },
     ],
   },
-}
+})

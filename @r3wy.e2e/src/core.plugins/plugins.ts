@@ -10,6 +10,7 @@ import { pipe } from "rambda"
 import webpackConfig from "../../webpack.config"
 
 const pluginConfig: Cypress.PluginConfig = (on, config) => {
+  // @ts-ignore
   on("file:preprocessor", webpack({ webpackOptions: webpackConfig }))
 
   return pipe(dotenvPlugin)(config)

@@ -1,3 +1,6 @@
+/** @typedef {import('webpack').Configuration} Configuration */
+/** @typedef {import('webpack-dev-server').Configuration} DevServerConfiguration */
+
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const Dotenv = require("dotenv-webpack")
@@ -7,10 +10,16 @@ const CopyPlugin = require("copy-webpack-plugin")
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
 
-module.exports = (env, props) => {
+/**
+ * @param {Record<string, string>} _env
+ * @param {Record<string, any>} props
+ *
+ * @returns {Configuration & { devServer: DevServerConfiguration }}
+ */
+module.exports = (_env, props) => {
   // Using "mode" CLI argument also sets process.env.NODE_ENV on DefinePlugin
   // to "development" or "production"
-  const isDevelopment = props.mode === "development"
+  const isDevelopment = props["mode"] === "development"
 
   return {
     entry: "./src/index.tsx",

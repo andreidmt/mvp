@@ -1,8 +1,12 @@
 {
   "include": ["src", "webpack.config.js"],
   "compilerOptions": {
-    "strict": true,
+    "declaration": false,
+    "checkJs": true,
     "allowJs": true,
+
+    "strict": true,
+    "skipLibCheck": true,
     "incremental": true,
     "esModuleInterop": true,
     "types": ["cypress", "@testing-library/cypress"]
