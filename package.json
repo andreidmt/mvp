@@ -8,9 +8,6 @@
     "type": "git",
     "url": "git+https://github.com/r3wy/r3wy.git"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "bugs": {
     "url": "https://github.com/r3wy/r3wy/issues"
   },
