@@ -112,6 +112,11 @@ jobs:
       - attach_workspace:
           at: *WORKSPACE_ROOT
       - run:
+          name: "[bash] Avoid hosts unknown for github"
+          command: |
+            mkdir -p ~/.ssh/
+            echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+      - run:
           name:
             "[lerna]: Update version, generate release, publish all non-private packages"
           command: "npm run release"
