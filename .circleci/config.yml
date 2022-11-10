@@ -117,7 +117,7 @@ jobs:
             mkdir -p ~/.ssh/
             echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - run:
-          name: "[bash] Set NPM TOKEN in .npmrc"
+          name: "[bash] Write $GITHUB_TOKEN in .npmrc"
           command: |
             echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" > ../.npmrc
       - run:
