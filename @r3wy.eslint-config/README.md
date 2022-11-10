@@ -1,1 +1,1 @@
-# R3wy's ESLint config
+# R3wy's ESLint configuration
