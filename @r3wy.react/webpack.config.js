@@ -59,7 +59,7 @@ module.exports = (_env, props) => {
           use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
         {
-          test: /\.(woff(2)?|ttf|eot|svg)$/,
+          test: /\.(woff(2)?|ttf|eot|png|svg)$/,
           type: "asset/resource",
         },
       ],

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 import { FCWithChildren } from "core.types/react"
 
-import { useAuth } from "core.hooks/use-auth"
+import { useAuth } from "core.hooks/use-auth/use-auth"
 
 import { GuestLayout } from "layout.guest/guest"
 
@@ -16,7 +16,7 @@ const GuestRoute: FCWithChildren<GuestRouteProps> = ({
   children,
   isExclusive = false,
 }) => {
-  const { isSignedin } = useAuth()
+  const [{ isSignedin }] = useAuth()
   const toast = useToast()
   const navigate = useNavigate()
 

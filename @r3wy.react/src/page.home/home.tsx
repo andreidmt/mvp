@@ -1,11 +1,31 @@
+import { SimpleGrid } from "@chakra-ui/react"
 import { FC } from "react"
 
-import { useAuth } from "core.hooks/use-auth"
+import { useMount } from "core.hooks/use-mount"
+
+import { useProducts } from "./hook.use-products/use-products"
+import { CardProduct } from "./ui.card-product/card-product"
 
 type HomePageProps = {}
 
 export const HomePage: FC<HomePageProps> = () => {
-  const { user } = useAuth()
+  const [{ items }, { findAll }] = useProducts()
 
-  return <div>Home {user?.name}</div>
+  useMount(() => {
+    findAll()
+  })
+
+  return (
+    <SimpleGrid columns={4} gap={5}>
+      {items.map(({ id, thumbnailURL, name, price, rating }) => (
+        <CardProduct
+          key={id}
+          thumbnailURL={thumbnailURL}
+          name={name}
+          price={price}
+          rating={rating}
+        />
+      ))}
+    </SimpleGrid>
+  )
 }
