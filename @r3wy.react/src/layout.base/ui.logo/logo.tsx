@@ -1,14 +1,10 @@
-import { EditIcon } from "@chakra-ui/icons"
-import { Box, Text } from "@chakra-ui/react"
+import { Image, ImageProps } from "@chakra-ui/react"
 import { FC } from "react"
 
-export type LogoProps = {}
+import logoPNG from "./logo.png"
 
-export const Logo: FC<LogoProps> = () => (
-  <Box>
-    <EditIcon w={8} h={8} mr={2} color="red.500" />
-    <Text as="span" fontSize="xl">
-      R3wy
-    </Text>
-  </Box>
+export type LogoProps = {} & ImageProps
+
+export const Logo: FC<LogoProps> = props => (
+  <Image src={logoPNG} alt="R3wy logo" {...props} />
 )

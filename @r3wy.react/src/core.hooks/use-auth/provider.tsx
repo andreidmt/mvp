@@ -16,13 +16,18 @@ type User = {
   avatarURL?: string
 }
 
-type State = {
-  user?: User
-  isSigningIn: boolean
-  isSignedin: boolean
-  signIn: () => Promise<void>
-  signOut: () => Promise<void>
-}
+type State = [
+  {
+    user?: User
+    isSignedin: boolean
+    isSigningIn: boolean
+    isSigningOut: boolean
+  },
+  {
+    signIn: () => Promise<void>
+    signOut: () => Promise<void>
+  }
+]
 
 export const authContext = createContext({} as State)
 
@@ -33,36 +38,49 @@ export const AuthProvider: FCWithChildren<{}> = ({ children }) => {
   /**
    *
    */
-  const signIn = useCallback(async () => {
+  const signIn = useCallback(() => {
     notify.start({ type: "create", message: "Signing in..." })
 
-    setUser(await delay(800).then(() => USER))
-
-    notify.stop({ type: "create" })
+    return delay(800).then(() => {
+      setUser(USER)
+      notify.stop({ type: "create" })
+    })
   }, [notify])
 
   /**
    *
    */
-  const signOut = useCallback(async () => {
+  const signOut = useCallback(() => {
     notify.start({ type: "delete", message: "Signing out..." })
 
-    setUser(await delay(800).then(() => undefined))
-
-    notify.stop({ type: "delete" })
+    return delay(800).then(() => {
+      setUser(undefined)
+      notify.stop({ type: "delete" })
+    })
   }, [notify])
 
   return (
     <authContext.Provider
       value={useMemo(
-        () => ({
+        () => [
+          {
+            user,
+            isSignedin: !!user,
+            isSigningIn: authStatus.create.isRunning,
+            isSigningOut: authStatus.delete.isRunning,
+          },
+          {
+            signIn,
+            signOut,
+          },
+        ],
+        [
           user,
-          isSignedin: !!user,
-          isSigningIn: authStatus.read.isRunning,
+          authStatus.create.isRunning,
+          authStatus.delete.isRunning,
           signIn,
           signOut,
-        }),
-        [user, authStatus.read.isRunning, signIn, signOut]
+        ]
       )}>
       {children}
     </authContext.Provider>
