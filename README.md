@@ -55,7 +55,7 @@ git clone git@github.com:r3wy/r3wy.git && \
 
 Even if you are not contributing code and only updating docs or CI
 configurations, you should still run once `npm run setup` or `npm install`.
-Doing this will activate git hooks present in [.gihooks](/.gihooks) folder.
+Doing this will activate git hooks present in [.githooks](/.githooks) folder.
 
 ## Application Stack
 
@@ -66,7 +66,7 @@ Doing this will activate git hooks present in [.gihooks](/.gihooks) folder.
 - [react v18][app-stack_react] - A JavaScript library for building user
   interfaces
 - [react-router v6][app-stack_react-router] - Declarative routing for React
-- [@chakra-ui/react][app-stack_chakra] - Simple, Modular & Accessible UI
+- [chakra-ui][app-stack_chakra] - Simple, Modular & Accessible UI
   Components for your React Applications
 - [rambda][app-stack_rambda] - Point-free style functional programming library.
   Faster, smaller and with TypeScript support alternative to
@@ -82,9 +82,8 @@ Doing this will activate git hooks present in [.gihooks](/.gihooks) folder.
 
 ## Development flow
 
-[Trunk based development](https://trunkbaseddevelopment.com/) with friends.
-
-All code changes flow one-way, bottom-up without diverging:
+[Trunk based development](https://trunkbaseddevelopment.com/) with friends. All
+code changes flow one-way, bottom-up without diverging:
 
 - `feat/pr-ranch` -> `dev` -> `main`.
 
@@ -113,7 +112,7 @@ All code changes flow one-way, bottom-up without diverging:
 
 ## Scripts
 
-*Starts development servers:*
+**Starts development servers:**
 
 - [localhost:8080](http://localhost:8080) - Local development server
 - [localhost:8888](http://localhost:8888) - Bundle analyzer
@@ -127,7 +126,7 @@ All code changes flow one-way, bottom-up without diverging:
 npm start
 ```
 
-*Build `src/index.tsx` entry point into `dist` folder:*
+**Build `src/index.tsx` entry point into `dist` folder:**
 
 ```bash
 # repo root
