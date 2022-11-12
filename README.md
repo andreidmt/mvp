@@ -145,6 +145,8 @@ npm run build
 ## Todo
 
 - [ ] Export Typescript config to separate `@r3wy.ts-config`
+- [ ] Use Lerna to run cross package script to benefit from caching and
+  parallel running
 - [ ] Refactor `useCRUDStatus` to allow arbitrary actions
 - [ ] Configure Lerna's [canary builds][todo_lerna-canary]
 - [ ] [Code splitting][todo_code-splitting]
