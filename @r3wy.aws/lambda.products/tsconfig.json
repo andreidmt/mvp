@@ -1,0 +1,10 @@
+{
+  "include": ["src", "index.js"],
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true,
+    "incremental": true,
+    "esModuleInterop": true
+  }
+}

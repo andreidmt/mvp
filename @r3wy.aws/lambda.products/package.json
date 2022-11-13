@@ -1,0 +1,34 @@
+{
+  "name": "@r3wy/lambda.products-findAll",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r3wy/r3wy.git"
+  },
+  "type": "module",
+  "exports": "./src/index.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "----UTIL": "",
+    "update": "ncu --deep --interactive",
+    "----LINT": "",
+    "lint": "eslint ./src",
+    "typecheck": "tsc --pretty --noEmit"
+  },
+  "dependencies": {
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1253.0"
+  },
+  "devDependencies": {
+    "@r3wy/eslint-config": "^1.6.0",
+    "@r3wy/prettier-config": "^1.4.0",
+    "@types/aws-lambda": "^8.10.108"
+  },
+  "engines": {
+    "node": "16.x"
+  }
+}
