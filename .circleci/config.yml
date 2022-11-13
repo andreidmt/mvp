@@ -185,7 +185,7 @@ jobs:
 
   deploy-lambda:
     parameters:
-      name:
+      function-name:
         type: string
     executor: aws
     shell: /bin/bash
@@ -202,27 +202,27 @@ jobs:
           name: "[aws] Deploy lambda"
           command: |
             # prepare zip package
-            cd @r3wy.aws/lambda.<< parameters.name >>
-            zip -r << parameters.name >>.zip node_modules src package.json
+            cd @r3wy.aws/lambda.<< parameters.function-name >>
+            zip -r << parameters.function-name >>.zip node_modules src package.json
 
             # ping aws about lambda name
             aws lambda get-function \
-              --function-name << parameters.name >> > /dev/null 2>&1
+              --function-name << parameters.function-name >> > /dev/null 2>&1
 
             # if last command's exit code is 0 (existed without error) then
             # lambda exists
             if [ 0 -eq $? ]; then
-              echo "Lambda '<< parameters.name >>' exists, updating ..."
+              echo "Lambda '<< parameters.function-name >>' exists, updating ..."
 
               aws lambda update-function-code \
-                --function-name << parameters.name>> \
-                --zip-file fileb://<< parameters.name >>.zip
+                --function-name << parameters.function-name>> \
+                --zip-file fileb://<< parameters.function-name >>.zip
             else
-              echo "Lambda '<< parameters.name >>' does not exist, creating ..."
+              echo "Lambda '<< parameters.function-name >>' does not exist, creating ..."
 
               aws lambda create-function \
-                --function-name << parameters.name >> \
-                --zip-file fileb://<< parameters.name >>.zip \
+                --function-name << parameters.function-name >> \
+                --zip-file fileb://<< parameters.function-name >>.zip \
                 --handler src/index.handler \
                 --runtime nodejs16.x \
                 --role arn:aws:iam::119616453667:role/LambdaRunner
@@ -259,7 +259,7 @@ workflows:
       - deploy-lambda:
           requires: [release-npm]
           parameters:
-            name: "products"
+            function-name: "products"
           context:
             - "R3wy - AWS @andreidmt"
       - deploy-react:
