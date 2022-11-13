@@ -258,8 +258,7 @@ workflows:
           requires: [release-npm]
       - deploy-lambda:
           requires: [release-npm]
-          parameters:
-            function-name: "products"
+          function-name: "products"
           context:
             - "R3wy - AWS @andreidmt"
       - deploy-react:
