@@ -85,7 +85,7 @@ Doing this will activate git hooks present in [.githooks](/.githooks) folder.
 [Trunk based development](https://trunkbaseddevelopment.com/) with friends. All
 code changes flow one-way, bottom-up without diverging:
 
-- `feat/pr-ranch` -> `dev` -> `main`.
+- `feat/pr-branch` -> `dev` -> `main`.
 
 ```text
 +--------+
@@ -144,18 +144,30 @@ npm run build
 
 ## Todo
 
-- [ ] Export Typescript config to separate `@r3wy.ts-config`
-- [ ] Use Lerna to run cross package script to benefit from caching and
-  parallel running
+- [ ] Export Typescript config to separate `@r3wy.ts-config` public package
+- [ ] Use [`lerna run`][todo_lerna-run] cross package script to benefit from
+  [caching][todo_lerna-cache] and parallel running
+- [ ] Configure Lerna to also increment versions of private repos
 - [ ] Refactor `useCRUDStatus` to allow arbitrary actions
-- [ ] Configure Lerna's [canary builds][todo_lerna-canary]
+- [ ] Configure Lerna [canary builds][todo_lerna-canary] for `dev` branch
+- [ ] Introduce [Terraform][todo_terraform] as [Infrastructure as
+  Code][todo_iac] solution
 - [ ] [Code splitting][todo_code-splitting]
-- [ ] I18n + Google Spreadsheet data import
+- [ ] Export UI primitives to separate `@r3wy.react-ui` public package
+- [ ] Export hooks to separate `@r3wy.react-hooks` public package
+- [ ] I18n with [react-i18next][todo_react-i18next] + Google Spreadsheet data
+  import
+- [ ] SSR
 - [ ] Update `CRUDStatusUI` to display all running operations
 - [ ] OAuth API + `useAuth` support
 - [ ] Realtime updates
 - [ ] Refactor inline css styles in separate [Chakra Components][todo_chakra-components]
 
+[todo_lerna-run]: https://github.com/lerna/lerna/tree/main/commands/run
+[todo_lerna-cache]: https://lerna.js.org/docs/concepts/how-caching-works
+[todo_terraform]: https://www.terraform.io
+[todo_iac]: https://en.wikipedia.org/wiki/Infrastructure_as_code
+[todo_react-i18next]: https://react.i18next.com
 [todo_chakra-components]: https://chakra-ui.com/docs/styled-system/component-style
 [todo_code-splitting]: https://www.copycat.dev/blog/react-lazy
 [todo_lerna-canary]: https://github.com/lerna/lerna/tree/main/commands/publish#--canary
