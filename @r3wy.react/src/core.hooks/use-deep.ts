@@ -8,7 +8,7 @@ import {
 
 import { determineWhatChanged } from "core.libs/array"
 
-const debug = require("debug")("@vanmoof:core.hooks/use-deep")
+const debug = require("debug")("@r3wy:core.hooks/use-deep")
 
 /**
  * Memoization hook with deep equality check on dependency array.
