@@ -164,15 +164,13 @@ jobs:
               s3://${AWS_S3_BUCKET_NAME} \
               --delete \
               --cache-control "max-age=86400" \
-              --exclude index.html \
-              --acl public-read
+              --exclude index.html
 
             # dont cache entry point
             aws s3 sync \
               @r3wy.react/dist \
               s3://${AWS_S3_BUCKET_NAME} \
-              --cache-control "no-cache" \
-              --acl public-read
+              --cache-control "no-cache"
 
 # Workflows - https://circleci.com/docs/2.0/workflows/
 #
