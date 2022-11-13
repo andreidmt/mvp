@@ -203,7 +203,7 @@ jobs:
           command: |
             # prepare zip package
             cd @r3wy.aws/lambda.<< parameters.function-name >>
-            zip -r << parameters.function-name >>.zip node_modules src package.json
+            zip -q -r << parameters.function-name >>.zip node_modules src package.json
 
             # ping aws about lambda name
             aws lambda get-function \
