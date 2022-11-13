@@ -5,8 +5,8 @@
 
 # R3wy
 
-> React application foundation with focus on maintainability by creating as
-> many guard rails :guardsman: as possible
+> React application proof-of-concept with focus on maintainability, setting as
+> many :guardsman: guard :railway_track: rails as possible.
 
 <!-- vim-markdown-toc GFM -->
 
@@ -23,16 +23,21 @@
 
 - :dragon: [Lerna][intro_lerna] monorepo to encourage setting up your
   application domain as a sum of smaller packages
-- :shipit: CircleCI with `jobs` that read as pure functions (kinda') and [Contexts][intro_cci-context]
+- :shipit: [CircleCI][intro_circleci] with [`jobs`][intro_cci-jobs] that read,
+  almost, as pure functions + [Contexts][intro_cci-context]
 - :suspect: [Typescript][intro_typescript], [ESLint][intro_eslint],
   [Prettier][intro_prettier], [LintStaged][intro_lint-staged],
   [CommitLint][intro_commit-lint] and [Githooks][intro_githooks] because I
   don't trust myself to be consistent
-- :love_letter: [`commitlint`][intro_commit-lint] + [`lerna
-  publish`][intro_lerna-publish] for fully automated versioning and releases
-- :hammer: [Cypress][intro_cypress] for end-to-end testing and
-  [Jest][intro_jest] for unit testing
+- :love_letter: Automated, [Conventional
+  Commits][intro_conventional-commits] based, versioning and releases via
+  [`commitlint`][intro_commit-lint] + [`lerna publish`][intro_lerna-publish]
+- :hammer: E2E testing using [Cypress][intro_cypress] and Unit testing with
+  [Jest][intro_jest]
 
+[intro_circleci]: https://circleci.com
+[intro_cci-jobs]: /.circleci/config.yml#27
+[intro_conventional-commits]: https://www.conventionalcommits.org
 [intro_lerna]: https://lerna.js.org
 [intro_cci-context]: https://circleci.com/docs/contexts
 [intro_typescript]: https://www.typescriptlang.org
@@ -142,11 +147,19 @@ npm run build
 | :------------------------------------------------------------------------ |
 | `start` and `build` scripts will not throw on TypeScript or ESLint errors |
 
+**Interactivly upgrade dependencies to the latest versions across all packages:**
+
+```bash
+# repo root
+#  > ncu --deep --interactive
+npm run update
+```
+
 ## Todo
 
 - [ ] Export Typescript config to separate `@r3wy.ts-config` public package
-- [ ] Use [`lerna run`][todo_lerna-run] cross package script to benefit from
-  [caching][todo_lerna-cache] and parallel running
+- [ ] Use [`lerna run`][todo_lerna-run] to run scripts cross-package and
+  benefit from [caching][todo_lerna-cache] and parallel running
 - [ ] Configure Lerna to also increment versions of private repos
 - [ ] Refactor `useCRUDStatus` to allow arbitrary actions
 - [ ] Configure Lerna [canary builds][todo_lerna-canary] for `dev` branch
