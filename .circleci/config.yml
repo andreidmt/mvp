@@ -262,7 +262,7 @@ workflows:
           context:
             - "R3wy - AWS @andreidmt"
       - deploy-react:
-          requires: [deploy-lambda]
+          requires: [build-react, deploy-lambda]
           context:
             - "R3wy - AWS @andreidmt"
 
