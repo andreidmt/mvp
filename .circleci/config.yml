@@ -51,9 +51,20 @@ jobs:
             &CACHE_KEY_NODE_MODULES 'r3wy-v1-{{ arch }}-{{ checksum
             "package-lock.json" }}'
       - run:
-          name: "[npm]: Install packages"
+          name: "[npm]: Install packages workspace wide"
           command: |
-            node -v && npm -v && npm run setup
+            # will hoist all packages at the root level
+            npm run ci
+      - run:
+          name: "[npm]: Install packages in each lambda function"
+          command: |
+            # lambda.* folders are not part of the workspace and packages
+            # wont get hoisted (until npm decides on how to support --nohoist)
+            for dir in ./@r3wy.aws/lambda.*;
+            do
+              cd "$dir"
+              npm ci --omit dev;
+            done
       - save_cache:
           paths:
             - node_modules
@@ -172,6 +183,51 @@ jobs:
               s3://${AWS_S3_BUCKET_NAME} \
               --cache-control "no-cache"
 
+  deploy-lambda:
+    parameters:
+      name:
+        type: string
+    executor: aws
+    shell: /bin/bash
+    working_directory: *JOB_WORKING_DIR
+    steps:
+      - run:
+          name: "[yum] Install packages missing in 'amazon/aws-cli' image"
+          command: |
+            # tar, gzip: required for unpacking workspace data
+            yum install -y tar gzip zip
+      - attach_workspace:
+          at: *WORKSPACE_ROOT
+      - run:
+          name: "[aws] Deploy lambda"
+          command: |
+            # prepare zip package
+            cd @r3wy.aws/lambda.<< parameters.name >>
+            zip -r << parameters.name >>.zip node_modules src package.json
+
+            # ping aws about lambda name
+            aws lambda get-function \
+              --function-name << parameters.name >> > /dev/null 2>&1
+
+            # if last command's exit code is 0 (existed without error) then
+            # lambda exists
+            if [ 0 -eq $? ]; then
+              echo "Lambda '<< parameters.name >>' exists, updating ..."
+
+              aws lambda update-function-code \
+                --function-name << parameters.name>> \
+                --zip-file fileb://<< parameters.name >>.zip
+            else
+              echo "Lambda '<< parameters.name >>' does not exist, creating ..."
+
+              aws lambda create-function \
+                --function-name << parameters.name >> \
+                --zip-file fileb://<< parameters.name >>.zip \
+                --handler src/index.handler \
+                --runtime nodejs16.x \
+                --role arn:aws:iam::119616453667:role/LambdaRunner
+            fi
+
 # Workflows - https://circleci.com/docs/2.0/workflows/
 #
 # Treat workflows as a jobs/commands pipe:
@@ -200,8 +256,14 @@ workflows:
             - "R3wy - GitHub"
       - build-react:
           requires: [release-npm]
+      - deploy-lambda:
+          requires: [release-npm]
+          parameters:
+            name: "products"
+          context:
+            - "R3wy - AWS @andreidmt"
       - deploy-react:
-          requires: [build-react]
+          requires: [deploy-lambda]
           context:
             - "R3wy - AWS @andreidmt"
 

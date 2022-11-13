@@ -15,7 +15,11 @@
     "Andrei Dumitrescu <andrei.dumitrescu@pm.me>"
   ],
   "workspaces": [
-    "@r3wy.*"
+    "@r3wy.core",
+    "@r3wy.e2e",
+    "@r3wy.eslint-config",
+    "@r3wy.prettier-config",
+    "@r3wy.react"
   ],
   "scripts": {
     "----UTIL": "",
