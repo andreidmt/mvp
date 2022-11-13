@@ -54,7 +54,7 @@ jobs:
           name: "[npm]: Install packages workspace wide"
           command: |
             # will hoist all packages at the root level
-            npm run ci
+            npm ci --also dev
       - run:
           name: "[npm]: Install packages in each lambda function"
           command: |
