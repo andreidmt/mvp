@@ -157,7 +157,8 @@ npm run update
 
 ## Todo
 
-- [ ] Update "setup" CI job to benefit from cached node_modules
+- [ ] Fix unit-test coverage scope, enforce minimum test coverate in CI
+- [ ] Update `setup` CI job to benefit from cached node_modules
 - [ ] :red_circle: Locally install npm packages in lambda function repos.
   Currently they are not part of workspace as a workaround for the lack of
   npm's or lerna's `--nohoist`
