@@ -1,4 +1,3 @@
-import { useToast } from "@chakra-ui/react"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
@@ -8,27 +7,31 @@ import { useAuth } from "core.hooks/use-auth/use-auth"
 
 import { GuestLayout } from "layout.guest/guest"
 
-type GuestRouteProps = {
+const debug = require("debug")("@r3wy:GuestRoute")
+
+export type GuestRouteProps = {
   isExclusive?: boolean
 }
 
-const GuestRoute: FCWithChildren<GuestRouteProps> = ({
+export const GuestRoute: FCWithChildren<GuestRouteProps> = ({
   children,
   isExclusive = false,
 }) => {
   const [{ isSignedin }] = useAuth()
-  const toast = useToast()
   const navigate = useNavigate()
+  const shouldRedirect = isExclusive ? !isSignedin : false
 
   useEffect(() => {
-    const isAllowed = !(isExclusive && isSignedin)
+    if (shouldRedirect) {
+      debug("Not allowed to access route", {
+        isExclusive,
+        isSignedin,
+        shouldRedirect,
+      })
 
-    if (!isAllowed) {
-      navigate(process.env["AUTH_USER_HOMEPAGE_ROUTE"] ?? "/")
+      navigate(process.env["HOMEPAGE_ROUTE"] ?? "/")
     }
-  }, [isExclusive, isSignedin, navigate, toast])
+  }, [isExclusive, isSignedin, shouldRedirect, navigate])
 
-  return <GuestLayout>{children}</GuestLayout>
+  return shouldRedirect ? null : <GuestLayout>{children}</GuestLayout>
 }
-
-export { GuestRoute }
