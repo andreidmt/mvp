@@ -202,11 +202,12 @@ jobs:
       - run:
           name: "[aws] Deploy lambda"
           command: |
-            # prepare zip package
+            echo "Prepare zip package"
             cd @r3wy.aws/lambda.<< parameters.function-name >>
             zip -q -r << parameters.function-name >>.zip node_modules src package.json
+            ls -lh << parameters.function-name >>
 
-            # ping aws about lambda name
+            echo "Ping AWS about lambda existence"
             aws lambda get-function \
               --function-name << parameters.function-name >> > /dev/null 2>&1
 
@@ -218,7 +219,7 @@ jobs:
               aws lambda update-function-code \
                 --function-name << parameters.function-name>> \
                 --zip-file fileb://<< parameters.function-name >>.zip \
-                --no-paginate
+                --no-cli-pager
             else
               echo "Lambda '<< parameters.function-name >>' does not exist, creating ..."
 
@@ -228,7 +229,7 @@ jobs:
                 --handler src/index.handler \
                 --runtime nodejs16.x \
                 --role "$AWS_LAMBDA_ROLE" \
-                --no-paginate
+                --no-cli-pager
             fi
 
 # Workflows - https://circleci.com/docs/2.0/workflows/
