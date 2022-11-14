@@ -6,7 +6,7 @@ import { useProducts } from "./hook.use-products/use-products"
 import { ProductUI } from "./product.ui"
 
 type ProductSectionProps = {
-  id: string
+  id: number
 }
 
 export const ProductSection: FC<ProductSectionProps> = ({ id }) => {
