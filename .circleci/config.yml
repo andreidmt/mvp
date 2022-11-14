@@ -202,26 +202,26 @@ jobs:
       - run:
           name: "[aws] Deploy lambda"
           command: |
-            echo "Prepare zip package"
+            echo "# Prepare zip package"
             cd @r3wy.aws/lambda.<< parameters.function-name >>
             zip -q -r << parameters.function-name >>.zip node_modules src package.json
-            ls -lh << parameters.function-name >>
+            ls -lh << parameters.function-name >>.zip
 
-            echo "Ping AWS about lambda existence"
+            echo "# Ping AWS about lambda existence"
             aws lambda get-function \
               --function-name << parameters.function-name >> > /dev/null 2>&1
 
             # if last command's exit code is 0 (existed without error) then
             # lambda exists
             if [ 0 -eq $? ]; then
-              echo "Lambda '<< parameters.function-name >>' exists, updating ..."
+              echo "# Lambda '<< parameters.function-name >>' exists, updating ..."
 
               aws lambda update-function-code \
                 --function-name << parameters.function-name>> \
                 --zip-file fileb://<< parameters.function-name >>.zip \
                 --no-cli-pager
             else
-              echo "Lambda '<< parameters.function-name >>' does not exist, creating ..."
+              echo "# Lambda '<< parameters.function-name >>' does not exist, creating ..."
 
               aws lambda create-function \
                 --function-name << parameters.function-name >> \
