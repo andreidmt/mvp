@@ -157,15 +157,21 @@ npm run update
 
 ## Todo
 
-- [ ] Export Typescript config to separate `@r3wy.ts-config` public package
+- [ ] :red_circle: Find way to locally install npm packages in lambda function
+  repos. Currently they are not part of workspace as a workaround for the lack
+  of npm's or lerna's `--nohoist`
 - [ ] Use [`lerna run`][todo_lerna-run] to run scripts cross-package and
   benefit from [caching][todo_lerna-cache] and parallel running
-- [ ] Configure Lerna to also increment versions of private repos
+- [ ] :red_circle: Increment versions and local dependencies of private repos
+  also, not only of those who get published to npm ... prob via separate call
+  to [`lerna version`][todo_lerna-version]
 - [ ] Refactor `useCRUDStatus` to allow arbitrary actions
-- [ ] Configure Lerna [canary builds][todo_lerna-canary] for `dev` branch
-- [ ] Introduce [Terraform][todo_terraform] as [Infrastructure as
+- [ ] :red_circle: Configure Lerna [canary builds][todo_lerna-canary] for `dev`
+  branch
+- [ ] :red_circle: Introduce [Terraform][todo_terraform] as [Infrastructure as
   Code][todo_iac] solution
 - [ ] [Code splitting][todo_code-splitting]
+- [ ] Export Typescript config to separate `@r3wy.ts-config` public package
 - [ ] Export UI primitives to separate `@r3wy.react-ui` public package
 - [ ] Export hooks to separate `@r3wy.react-hooks` public package
 - [ ] I18n with [react-i18next][todo_react-i18next] + Google Spreadsheet data
@@ -176,6 +182,7 @@ npm run update
 - [ ] Realtime updates
 - [ ] Refactor inline css styles in separate [Chakra Components][todo_chakra-components]
 
+[todo_lerna-version]: https://github.com/lerna/lerna/tree/main/commands/version#readme
 [todo_lerna-run]: https://github.com/lerna/lerna/tree/main/commands/run
 [todo_lerna-cache]: https://lerna.js.org/docs/concepts/how-caching-works
 [todo_terraform]: https://www.terraform.io
