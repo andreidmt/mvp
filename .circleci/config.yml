@@ -217,7 +217,8 @@ jobs:
 
               aws lambda update-function-code \
                 --function-name << parameters.function-name>> \
-                --zip-file fileb://<< parameters.function-name >>.zip
+                --zip-file fileb://<< parameters.function-name >>.zip \
+                --no-paginate
             else
               echo "Lambda '<< parameters.function-name >>' does not exist, creating ..."
 
@@ -226,7 +227,8 @@ jobs:
                 --zip-file fileb://<< parameters.function-name >>.zip \
                 --handler src/index.handler \
                 --runtime nodejs16.x \
-                --role "$AWS_LAMBDA_ROLE"
+                --role "$AWS_LAMBDA_ROLE" \
+                --no-paginate
             fi
 
 # Workflows - https://circleci.com/docs/2.0/workflows/
