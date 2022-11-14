@@ -1,4 +1,6 @@
-export const PRODUCTS = [
+import { delay } from "core.libs/promise"
+
+const PRODUCTS = [
   {
     id: "01",
     thumbnailURL:
@@ -24,3 +26,15 @@ export const PRODUCTS = [
     rating: 2,
   },
 ]
+
+export type ProductModel = {
+  id: string
+  name: string
+  price: number
+  rating: number
+  thumbnailURL?: string
+}
+
+export const Products = {
+  findAll: () => delay(700).then(() => PRODUCTS),
+}

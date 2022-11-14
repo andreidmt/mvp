@@ -6,9 +6,9 @@ import { useMount } from "core.hooks/use-mount"
 import { useProducts } from "./hook.use-products/use-products"
 import { CardProduct } from "./ui.card-product/card-product"
 
-type HomePageProps = {}
+type ProductsListPageProps = {}
 
-export const HomePage: FC<HomePageProps> = () => {
+export const ProductsListPage: FC<ProductsListPageProps> = () => {
   const [{ items }, { findAll }] = useProducts()
 
   useMount(() => {
@@ -20,8 +20,9 @@ export const HomePage: FC<HomePageProps> = () => {
       {items.map(({ id, thumbnailURL, name, price, rating }) => (
         <CardProduct
           key={id}
-          thumbnailURL={thumbnailURL}
+          id={id}
           name={name}
+          thumbnailURL={thumbnailURL}
           price={price}
           rating={rating}
         />

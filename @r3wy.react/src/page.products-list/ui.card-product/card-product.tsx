@@ -1,7 +1,6 @@
 import {
   AspectRatio,
   Box,
-  Button,
   HStack,
   Image,
   Skeleton,
@@ -10,9 +9,12 @@ import {
 } from "@chakra-ui/react"
 import { FC } from "react"
 
+import { ButtonLink } from "core.ui/button.link/link"
+
 import { Rating } from "./ui.rating/rating"
 
 export type CardProductProps = {
+  id: string
   name: string
   price: number
   rating: number
@@ -20,6 +22,7 @@ export type CardProductProps = {
 }
 
 export const CardProduct: FC<CardProductProps> = ({
+  id,
   name,
   price,
   rating,
@@ -54,9 +57,9 @@ export const CardProduct: FC<CardProductProps> = ({
       </HStack>
     </Stack>
     <Stack align="center">
-      <Button colorScheme="blue" width="full">
+      <ButtonLink to={`/products/${id}`} colorScheme="blue" width="full">
         View details
-      </Button>
+      </ButtonLink>
     </Stack>
   </Stack>
 )
