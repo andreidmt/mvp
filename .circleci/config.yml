@@ -64,6 +64,7 @@ jobs:
             do
               cd "$dir"
               npm ci --omit dev;
+              cd ..
             done
       - save_cache:
           paths:
@@ -225,7 +226,7 @@ jobs:
                 --zip-file fileb://<< parameters.function-name >>.zip \
                 --handler src/index.handler \
                 --runtime nodejs16.x \
-                --role arn:aws:iam::119616453667:role/LambdaRunner
+                --role "$AWS_LAMBDA_ROLE"
             fi
 
 # Workflows - https://circleci.com/docs/2.0/workflows/
@@ -262,7 +263,7 @@ workflows:
           context:
             - "R3wy - AWS @andreidmt"
       - deploy-react:
-          requires: [build-react, deploy-lambda]
+          requires: [build-react]
           context:
             - "R3wy - AWS @andreidmt"
 
