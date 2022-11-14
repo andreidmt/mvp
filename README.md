@@ -157,14 +157,15 @@ npm run update
 
 ## Todo
 
-- [ ] :red_circle: Find way to locally install npm packages in lambda function
-  repos. Currently they are not part of workspace as a workaround for the lack
-  of npm's or lerna's `--nohoist`
+- [ ] Update "setup" CI job to benefit from cached node_modules
+- [ ] :red_circle: Locally install npm packages in lambda function repos.
+  Currently they are not part of workspace as a workaround for the lack of
+  npm's or lerna's `--nohoist`
 - [ ] Use [`lerna run`][todo_lerna-run] to run scripts cross-package and
   benefit from [caching][todo_lerna-cache] and parallel running
-- [ ] :red_circle: Increment versions and local dependencies of private repos
-  also, not only of those who get published to npm ... prob via separate call
-  to [`lerna version`][todo_lerna-version]
+- [ ] :red_circle: Increment versions and local dependencies versions of
+  private repos also, not only of those who get published to npm ... prob via
+  separate call to [`lerna version`][todo_lerna-version]
 - [ ] Refactor `useCRUDStatus` to allow arbitrary actions
 - [ ] :red_circle: Configure Lerna [canary builds][todo_lerna-canary] for `dev`
   branch
