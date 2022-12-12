@@ -58,8 +58,10 @@ jobs:
       - run:
           name: "[npm]: Install packages in each lambda function"
           command: |
-            # lambda.* folders are not part of the workspace and packages
-            # wont get hoisted (until npm decides on how to support --nohoist)
+            # @r3wy.aws/lambda.* folders are not part of the workspace since
+            # npm workspaces does not support --nohoist (yet?). We need packages
+            # installed localy, without hoisting, because lambdas need to
+            # deploy with their dependencies.
             for dir in ./@r3wy.aws/lambda.*;
             do
               cd "$dir"
@@ -104,6 +106,9 @@ jobs:
           command: |
             npm run test.e2e
 
+  # Required:
+  #  - COVERALLS_REPO_TOKEN
+  #  - COVERALLS_SERVICE_NAME
   submit-coverage:
     executor: node
     working_directory: *JOB_WORKING_DIR
@@ -114,6 +119,10 @@ jobs:
           name: "[c8, coveralls]: Publish test coverage to Coveralls"
           command: "npm run coverage"
 
+  # Required:
+  #  - GITHUB_TOKEN
+  #  - GIT_AUTHOR_EMAIL, GIT_AUTHOR_NAME
+  #  - GIT_COMMITTER_EMAIL, GIT_COMMITTER_NAME
   release-npm:
     executor: node
     working_directory: *JOB_WORKING_DIR
@@ -129,7 +138,7 @@ jobs:
             mkdir -p ~/.ssh/
             echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - run:
-          name: "[bash] Write $GITHUB_TOKEN in .npmrc"
+          name: "[bash] Authenticate to GitHub's npm registry"
           command: |
             echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" > ../.npmrc
       - run:
@@ -156,6 +165,9 @@ jobs:
           paths:
             - r3wy
 
+  # Required:
+  #  - AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY: `aws-cli` auth
+  #  - AWS_S3_BUCKET_NAME:
   deploy-react:
     executor: aws
     working_directory: *JOB_WORKING_DIR
@@ -184,11 +196,24 @@ jobs:
               s3://${AWS_S3_BUCKET_NAME} \
               --cache-control "no-cache"
 
+  # Required:
+  #  - AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY: `aws-cli` auth
+  #  - AWS_LAMBDA_ROLE: Role lambdas assume
+  #  - AWS_REGION: Region lambda functions get deployed to
   deploy-lambda:
     parameters:
       function-name:
         type: string
     executor: aws
+      # Overwrite default "/bin/bash -eo pipefail" which says that if anything
+      # inside a step's command fails (exits with non-zero status) then
+      # the job also fails.
+      #
+      # goto: DL-UPSERT
+      #
+      # See more:
+      #  - https://circleci.com/docs/configuration-reference/#default-shell-options
+      #  - https://ss64.com/bash/set.html
     shell: /bin/bash
     working_directory: *JOB_WORKING_DIR
     steps:
@@ -207,7 +232,8 @@ jobs:
             zip -q -r << parameters.function-name >>.zip node_modules src package.json
             ls -lh << parameters.function-name >>.zip
 
-            echo "# Ping AWS about lambda existence"
+            # label: DL-UPSERT
+            echo "# Ping AWS about lambda status"
             aws lambda get-function \
               --function-name << parameters.function-name >> > /dev/null 2>&1
 
@@ -217,7 +243,7 @@ jobs:
               echo "# Lambda '<< parameters.function-name >>' exists, updating ..."
 
               aws lambda update-function-code \
-                --function-name << parameters.function-name>> \
+                --function-name << parameters.function-name >> \
                 --zip-file fileb://<< parameters.function-name >>.zip \
                 --no-cli-pager
             else
@@ -246,8 +272,6 @@ workflows:
               only: [main]
       - setup:
           requires: [detect-secrets]
-          context:
-            - "R3wy - GitHub"
       - test-unit:
           requires: [setup]
       - submit-coverage:
