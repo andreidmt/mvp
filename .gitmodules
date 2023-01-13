@@ -1,0 +1,6 @@
+[submodule "@asd14.use-crud-state"]
+	path = @asd14.use-crud-state
+	url = git@github.com:asd-xiv/use-crud-state.git
+[submodule "@asd14.react-hooks"]
+	path = @asd14.react-hooks
+	url = git@github.com:asd-xiv/react-hooks.git
