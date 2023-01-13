@@ -24,16 +24,16 @@
     ]
   },
   "dependencies": {
-    "@cypress/webpack-preprocessor": "^5.15.5",
-    "@swc/helpers": "^0.4.12",
-    "@testing-library/cypress": "^8.0.3",
-    "cypress": "^10.0.0",
+    "@cypress/webpack-preprocessor": "^5.16.1",
+    "@swc/helpers": "^0.4.14",
+    "@testing-library/cypress": "^9.0.0",
+    "cypress": "^12.3.0",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-dotenv": "^2.0.0",
-    "rambda": "^7.3.0"
+    "rambda": "^7.4.0"
   },
   "devDependencies": {
-    "@r3wy/eslint-config": "^1.5.1",
+    "@r3wy/eslint-config": "^1.6.0",
     "@r3wy/prettier-config": "^1.4.0",
     "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/cypress-dotenv": "^2.0.0",
