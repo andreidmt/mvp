@@ -8,13 +8,14 @@
  *
  * @returns {Promise<APIGatewayProxyResult>}
  */
-export const handler = async (event, context) => {
-  console.log(`Event: ${JSON.stringify(event, null, 2)}`)
-  console.log(`Context: ${JSON.stringify(context, null, 2)}`)
+export const findOne = async (event, context) => {
+  console.log(`Event: ${JSON.stringify(event.pathParameters, null, 2)}`)
+  console.log(`Context: ${JSON.stringify(context.functionName, null, 2)}`)
 
   return {
     statusCode: 200,
     body: JSON.stringify({
+      id: event.pathParameters.id,
       message: "hello world",
     }),
   }

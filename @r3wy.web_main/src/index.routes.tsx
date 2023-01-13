@@ -2,6 +2,7 @@ import { FC } from "react"
 import { Routes, Route } from "react-router-dom"
 
 import { NotFoundPage } from "./page.404/404"
+import { AuthReturnPage } from "./page.auth-return/auth-return"
 import { ProductsDetailsPage } from "./page.products-details/products-details"
 import { ProductsListPage } from "./page.products-list/products-list"
 import { GuestRoute } from "./route.guest/guest"
@@ -32,16 +33,14 @@ export const AppRoutes: FC<AppRoutesProps> = () => (
     />
 
     {/* only un-authenticated */}
-    {
-      // <Route
-      //   path="/login"
-      //   element={
-      //     <GuestRoute isExclusive>
-      //       <LoginPage />
-      //     </GuestRoute>
-      //   }
-      // />
-    }
+    <Route
+      path="/auth/oauth-return"
+      element={
+        <GuestRoute isExclusive>
+          <AuthReturnPage />
+        </GuestRoute>
+      }
+    />
 
     {/* only authenticated */}
     {

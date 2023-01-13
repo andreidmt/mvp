@@ -19,7 +19,7 @@ export const GuestRoute: FCWithChildren<GuestRouteProps> = ({
 }) => {
   const [{ isSignedin }] = useAuth()
   const navigate = useNavigate()
-  const shouldRedirect = isExclusive ? !isSignedin : false
+  const shouldRedirect = isExclusive ? isSignedin : false
 
   useEffect(() => {
     if (shouldRedirect) {

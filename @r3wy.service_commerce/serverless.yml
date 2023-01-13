@@ -1,0 +1,27 @@
+service: r3wy-commerce
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: eu-central-1
+  timeout: 10
+  memorySize: 256
+
+package:
+  patterns:
+    - "!tsconfig.json"
+    - "!.prettierrc.cjs"
+    - "!.eslintrc"
+    - "!.npmrc"
+    - "src/**"
+
+functions:
+  findOne:
+    handler: src/find-one/route.findOne
+    events:
+      - httpApi:
+          path: /products/{id}
+          method: get

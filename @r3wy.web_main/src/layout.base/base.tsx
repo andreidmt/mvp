@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Spacer } from "@chakra-ui/react"
+import { Box, Button, Flex, Heading, Spacer } from "@chakra-ui/react"
 
 import { FCWithChildren } from "core.types/react"
 
@@ -39,13 +39,18 @@ export const BaseLayout: FCWithChildren<BaseLayoutProps> = ({ children }) => {
             <Heading size="md">R3wy App</Heading>
           </Box>
           <Spacer />
-          <Avatar
-            name={user?.name}
-            avatarURL={user?.avatarURL}
-            isSignedIn={isSignedin}
-            signIn={isSigningIn ? undefined : signIn}
-            signOut={isSigningOut ? undefined : signOut}
-          />
+          {isSignedin ? (
+            <Avatar
+              name={user?.name}
+              avatarURL={user?.avatarURL}
+              isSigningOut={isSigningOut}
+              signOut={signOut}
+            />
+          ) : (
+            <Button colorScheme="red" disabled={isSigningIn} onClick={signIn}>
+              Sign in
+            </Button>
+          )}
         </Flex>
       </Box>
       <Box
