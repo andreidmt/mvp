@@ -1,49 +1,45 @@
 module.exports = {
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 2021,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
   env: {
     browser: true,
     es2021: true,
+    node: false,
   },
+  plugins: ["testing-library"],
   extends: [
-    "./common.js",
-    "plugin:react-hooks/recommended",
-    "plugin:jest/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    ...[
+      "../rules/import.js",
+      "../rules/typescript.js",
+      "../rules/react.js",
+      "../rules/jest.js",
+      "../rules/prettier.js",
+    ].map(require.resolve),
   ],
-  plugins: ["react", "testing-library", "jest"],
-  rules: {
-    "react/react-in-jsx-scope": "off",
-    "react-hooks/exhaustive-deps": "error",
-    "react/prop-types": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/require-default-props": "off",
-    "react/function-component-definition": [
-      "error",
-      {
-        namedComponents: "arrow-function",
-        unnamedComponents: "arrow-function",
-      },
-    ],
-
-    "jest/require-top-level-describe": "error",
-    "jest/consistent-test-it": [
-      "error",
-      {
-        fn: "test",
-        withinDescribe: "test",
-      },
-    ],
-    "jest/valid-title": [
-      "error",
-      {
-        mustMatch: {
-          test: "^given \\[.*\\] should \\[.*\\]$",
-        },
-      },
-    ],
-  },
+  rules: {},
   overrides: [
     {
       files: ["**/?(*.)test.tsx"],
       extends: ["plugin:testing-library/react"],
     },
   ],
+  settings: {
+    "react": {
+      version: "detect",
+    },
+
+    /*
+     * A list of regex strings that, if matched by a path, will not report
+     * the matching module if no exports are found.
+     */
+    "import/ignore": [".(sass|scss|less|css)$"],
+  },
 }

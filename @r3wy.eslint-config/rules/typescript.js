@@ -1,18 +1,20 @@
 module.exports = {
-  env: {
-    es2021: true,
-  },
-  parser: "@typescript-eslint/parser",
-  extends: ["airbnb", "airbnb-typescript", "prettier"],
-  plugins: ["prettier", "@typescript-eslint"],
+  plugins: ["@typescript-eslint"],
+  extends: ["plugin:@typescript-eslint/recommended"],
   rules: {
-    "prettier/prettier": "error",
-
-    // let "tsc" catch these when doing type checking as this rule currently
-    // gives false positives for variables starting with an underscore
-    "@typescript-eslint/no-unused-vars": "off",
-
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/no-use-before-define": "error",
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        types: {
+          "{}": false,
+        },
+        extendDefaults: true,
+      },
+    ],
+
     "@typescript-eslint/naming-convention": [
       "error",
       {
@@ -54,8 +56,5 @@ module.exports = {
         format: null,
       },
     ],
-
-    "import/prefer-default-export": "off",
-    "import/no-unresolved": "off",
   },
 }
