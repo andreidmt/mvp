@@ -30,7 +30,6 @@ const validateRequestData = ajv.compile({
 export const findMany = async (event, context) => {
   const isValid = validateRequestData({
     headers: event.headers,
-
     params: event.pathParameters,
     query: event.queryStringParameters,
     body: event.body,
