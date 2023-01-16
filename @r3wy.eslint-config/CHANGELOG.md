@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0](https://github.com/r3wy/r3wy/compare/@r3wy/eslint-config@1.6.0...@r3wy/eslint-config@1.7.0) (2023-01-16)
+
+### Features
+
+- split linting config by technology
+  ([2acfffd](https://github.com/r3wy/r3wy/commit/2acfffdff3e7304b87e6756d525e8e05452915ec))
+- update dependencies
+  ([2c9f6a5](https://github.com/r3wy/r3wy/commit/2c9f6a58b5e052f5b32186e5865f75a721e2747f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.6.0](https://github.com/r3wy/r3wy/compare/@r3wy/eslint-config@1.5.1...@r3wy/eslint-config@1.6.0) (2022-11-12)
 
 ### Features
