@@ -1,10 +1,23 @@
-import Ajv from "ajv"
-import { schema } from "./schema"
-
 /** @typedef {import('aws-lambda').APIGatewayEvent } APIGatewayEvent */
 /** @typedef {import('aws-lambda').Context} Context */
 /** @typedef {import('aws-lambda').APIGatewayProxyResult} APIGatewayProxyResult */
 /** @typedef {import('../model').Product} Product */
+
+import Ajv from "ajv"
+import ProductSchema from "../schema.json" assert { type: "json" }
+import FindManyReqValidationSchema from "./schema.js"
+
+/*
+ * Compile Model and Request validation schemas
+ */
+const ajv = new Ajv()
+
+ajv.addSchema(ProductSchema, "Product")
+
+const validateRequestData = ajv.compile({
+  type: "object",
+  properties: FindManyReqValidationSchema,
+})
 
 /**
  * Return an array of Products.
@@ -15,10 +28,9 @@ import { schema } from "./schema"
  * @returns {Promise<APIGatewayProxyResult>}
  */
 export const findMany = async (event, context) => {
-  const validate = new Ajv().compile(schema)
-
-  const isValid = validate({
+  const isValid = validateRequestData({
     headers: event.headers,
+
     params: event.pathParameters,
     query: event.queryStringParameters,
     body: event.body,
@@ -27,7 +39,7 @@ export const findMany = async (event, context) => {
   if (!isValid) {
     return {
       statusCode: 400,
-      body: JSON.stringify(validate.errors),
+      body: JSON.stringify(validateRequestData.errors),
     }
   }
 

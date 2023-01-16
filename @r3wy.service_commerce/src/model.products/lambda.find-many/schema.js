@@ -1,4 +1,4 @@
-export const schema = {
+export default {
   headers: {
     type: "object",
     required: ["authorization"],
@@ -17,22 +17,26 @@ export const schema = {
   query: {
     type: "object",
     additionalProperties: false,
-    pluck: {
-      type: "array",
-      items: { $ref: "../schema.json#/PluckableFields" },
-      uniqueItems: true,
-      default: [],
-    },
-    limit: {
-      type: "integer",
-      minimum: 10,
-      maximum: 100,
-      default: 10,
-    },
-    offset: {
-      type: "integer",
-      minimum: 0,
-      default: 0,
+    properties: {
+      pluck: {
+        type: "array",
+        items: {
+          $ref: "Product#/definitions/PluckableFields",
+        },
+        uniqueItems: true,
+        default: [],
+      },
+      limit: {
+        type: "integer",
+        minimum: 10,
+        maximum: 100,
+        default: 10,
+      },
+      offset: {
+        type: "integer",
+        minimum: 0,
+        default: 0,
+      },
     },
   },
 

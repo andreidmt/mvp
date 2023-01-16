@@ -2,9 +2,12 @@
   "include": ["src"],
   "compilerOptions": {
     "strict": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "allowJs": true,
     "checkJs": true,
     "incremental": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true
   }
 }

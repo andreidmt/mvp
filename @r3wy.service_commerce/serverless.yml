@@ -7,13 +7,22 @@ provider:
   runtime: nodejs18.x
   stage: ${opt:stage, "dev"}
   region: eu-central-1
-  timeout: 10
+  timeout: 5
   memorySize: 256
+
+plugins:
+  - serverless-prune-plugin
+
+custom:
+  prune:
+    automatic: true
+    number: 3
 
 package:
   excludeDevDependencies: true
   patterns:
     - "!tsconfig.json"
+    - "!tsconfig.tsbuildinfo"
     - "!.prettierrc.cjs"
     - "!.eslintrc"
     - "!.npmrc"

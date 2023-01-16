@@ -1,5 +1,4 @@
 {
-  "$id": "carts",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Cart": {
