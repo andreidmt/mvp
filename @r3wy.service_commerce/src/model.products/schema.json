@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "EditableFields": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "PluckableFields": {
+      "enum": [
+        "id",
+        "name",
+        "description",
+        "price",
+        "createdAt",
+        "updatedAt"
+      ],
+      "type": "string"
+    },
+    "Product": {
+      "additionalProperties": false,
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "price",
+        "createdAt",
+        "updatedAt"
+      ],
+      "type": "object"
+    }
+  }
+}

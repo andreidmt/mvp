@@ -14,18 +14,33 @@
   ],
   "scripts": {
     "----UTIL": "",
-    "update": "ncu --deep --interactive",
+    "update": "ncu --interactive",
     "----LINT": "",
-    "lint": "eslint ./src",
-    "typecheck": "tsc --pretty --noEmit"
+    "lint": "eslint src",
+    "typecheck": "tsc --pretty --noEmit",
+    "----TEST": "",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "----BUILD": "",
+    "build.carts-schemas": "ts-json-schema-generator --no-type-check --path 'src/model.carts/model.ts' --out 'src/model.carts/schema.json'",
+    "build.products-schemas": "ts-json-schema-generator --no-type-check --path 'src/model.products/model.ts' --out 'src/model.products/schema.json'",
+    "build.schemas": "npm run build.carts-schemas && npm run build.products-schemas",
+    "----DEPLOY": "",
+    "predeploy": "npm run build.schemas",
+    "deploy": "serverless deploy --verbose"
   },
   "dependencies": {
+    "ajv": "^8.12.0"
+  },
+  "peerDependencies": {
+    "serverless": "^3.26.0"
   },
   "devDependencies": {
     "@r3wy/eslint-config": "^1.6.0",
     "@r3wy/prettier-config": "^1.4.0",
     "@types/aws-lambda": "^8.10.109",
-    "aws-lambda": "^1.0.7"
+    "aws-lambda": "^1.0.7",
+    "ts-json-schema-generator": "^1.2.0"
   },
   "engines": {
     "node": ">=18",

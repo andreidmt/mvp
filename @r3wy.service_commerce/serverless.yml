@@ -1,16 +1,17 @@
 service: r3wy-commerce
 
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: nodejs18.x
-  stage: dev
+  stage: ${opt:stage, "dev"}
   region: eu-central-1
   timeout: 10
   memorySize: 256
 
 package:
+  excludeDevDependencies: true
   patterns:
     - "!tsconfig.json"
     - "!.prettierrc.cjs"
@@ -19,9 +20,15 @@ package:
     - "src/**"
 
 functions:
-  findOne:
-    handler: src/find-one/route.findOne
+  productsGetOne:
+    handler: src/model.products/lambda.get-one/route.getOne
     events:
       - httpApi:
           path: /products/{id}
+          method: get
+  productsFindMany:
+    handler: src/model.products/lambda.find-many/route.findMany
+    events:
+      - httpApi:
+          path: /products
           method: get

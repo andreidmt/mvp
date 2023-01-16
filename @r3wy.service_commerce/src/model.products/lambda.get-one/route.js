@@ -8,7 +8,7 @@
  *
  * @returns {Promise<APIGatewayProxyResult>}
  */
-export const findOne = async (event, context) => {
+export const getOne = async (event, context) => {
   console.log(`Event: ${JSON.stringify(event.pathParameters, null, 2)}`)
   console.log(`Context: ${JSON.stringify(context.functionName, null, 2)}`)
 

@@ -27,14 +27,14 @@
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "----TEST": "",
-    "test.unit": "npm run test --workspace=@r3wy/react",
+    "test.unit": "npm run test --workspace=@r3wy/web_main",
     "test.e2e": "npm run test --workspace=@r3wy/e2e",
-    "coverage": "npm run coverage --workspace=@r3wy/react",
+    "coverage": "npm run coverage --workspace=@r3wy/web_main",
     "----DEVELOP": "",
-    "start": "npm run start --workspace=@r3wy/react",
+    "start": "npm run start --workspace=@r3wy/web_main",
     "----BUNDLE": "",
     "release": "lerna publish --no-private --yes",
-    "build": "npm run build --workspace=@r3wy/react"
+    "build": "npm run build --workspace=@r3wy/web_main"
   },
   "lint-staged": {
     "!(*CHANGELOG).md": [
