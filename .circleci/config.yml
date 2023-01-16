@@ -58,14 +58,13 @@ jobs:
       - run:
           name: "[npm]: Install packages in each lambda function"
           command: |
-            # @r3wy.aws/lambda.* folders are not part of the workspace since
+            # "@r3wy.service_*" folders are not part of the workspace since
             # npm workspaces does not support --nohoist (yet?). We need packages
             # installed localy, without hoisting, because lambdas need to
             # deploy with their dependencies.
-            for dir in ./@r3wy.aws/lambda.*;
-            do
+            for dir in ./@r3wy.service_*; do
               cd "$dir"
-              npm ci --omit dev;
+              npm ci;
               cd ..
             done
       - save_cache:
@@ -198,23 +197,9 @@ jobs:
 
   # Required:
   #  - AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY: `aws-cli` auth
-  #  - AWS_LAMBDA_ROLE: Role lambdas assume
   #  - AWS_REGION: Region lambda functions get deployed to
-  deploy-lambda:
-    parameters:
-      function-name:
-        type: string
-    executor: aws
-      # Overwrite default "/bin/bash -eo pipefail" which says that if anything
-      # inside a step's command fails (exits with non-zero status) then
-      # the job also fails.
-      #
-      # goto: DL-UPSERT
-      #
-      # See more:
-      #  - https://circleci.com/docs/configuration-reference/#default-shell-options
-      #  - https://ss64.com/bash/set.html
-    shell: /bin/bash
+  deploy-services:
+    executor: node
     working_directory: *JOB_WORKING_DIR
     steps:
       - run:
@@ -225,38 +210,13 @@ jobs:
       - attach_workspace:
           at: *WORKSPACE_ROOT
       - run:
-          name: "[aws] Deploy lambda"
+          name: "[serverless] Deploy entire service"
           command: |
-            echo "# Prepare zip package"
-            cd @r3wy.aws/lambda.<< parameters.function-name >>
-            zip -q -r << parameters.function-name >>.zip node_modules src package.json
-            ls -lh << parameters.function-name >>.zip
-
-            # label: DL-UPSERT
-            echo "# Ping AWS about lambda status"
-            aws lambda get-function \
-              --function-name << parameters.function-name >> > /dev/null 2>&1
-
-            # if last command's exit code is 0 (existed without error) then
-            # lambda exists
-            if [ 0 -eq $? ]; then
-              echo "# Lambda '<< parameters.function-name >>' exists, updating ..."
-
-              aws lambda update-function-code \
-                --function-name << parameters.function-name >> \
-                --zip-file fileb://<< parameters.function-name >>.zip \
-                --no-cli-pager
-            else
-              echo "# Lambda '<< parameters.function-name >>' does not exist, creating ..."
-
-              aws lambda create-function \
-                --function-name << parameters.function-name >> \
-                --zip-file fileb://<< parameters.function-name >>.zip \
-                --handler src/index.handler \
-                --runtime nodejs16.x \
-                --role "$AWS_LAMBDA_ROLE" \
-                --no-cli-pager
-            fi
+            for dir in ./@r3wy.service_*; do
+              cd "$dir"
+              npm run deploy;
+              cd ..
+            done
 
 # Workflows - https://circleci.com/docs/2.0/workflows/
 #
@@ -284,9 +244,8 @@ workflows:
             - "R3wy - GitHub"
       - build-react:
           requires: [release-npm]
-      - deploy-lambda:
+      - deploy-services:
           requires: [release-npm]
-          function-name: "products"
           context:
             - "R3wy - AWS @andreidmt"
       - deploy-react:
