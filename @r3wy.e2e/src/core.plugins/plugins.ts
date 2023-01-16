@@ -7,7 +7,7 @@ import webpack from "@cypress/webpack-preprocessor"
 import dotenvPlugin from "cypress-dotenv"
 import { pipe } from "rambda"
 
-import webpackConfig from "../../webpack.config"
+import webpackConfig from "../../webpack.config.js"
 
 const pluginConfig: Cypress.PluginConfig = (on, config) => {
   // @ts-ignore
