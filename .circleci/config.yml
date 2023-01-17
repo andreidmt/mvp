@@ -39,6 +39,9 @@ jobs:
           paths:
             - r3wy
 
+  # Required:
+  #  - GITHUB_TOKEN: @r3wy packages are private and require a GitHub token to
+  #                  install them
   setup:
     executor: node
     working_directory: *JOB_WORKING_DIR
@@ -51,10 +54,9 @@ jobs:
             &CACHE_KEY_NODE_MODULES 'r3wy-v1-{{ arch }}-{{ checksum
             "package-lock.json" }}'
       - run:
-          name: "[npm]: Install packages workspace wide"
+          name: "[lerna]: Install packages workspace wide"
           command: |
-            # will hoist all packages at the root level
-            npm ci --also dev
+            npm run setup
       - run:
           name: "[npm]: Install packages in each lambda function"
           command: |
@@ -232,6 +234,8 @@ workflows:
               only: [main]
       - setup:
           requires: [detect-secrets]
+          context:
+            - "R3wy - GitHub"
       - test-unit:
           requires: [setup]
       - submit-coverage:
