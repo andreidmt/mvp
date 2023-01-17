@@ -1,9 +1,10 @@
 /** @typedef {import('aws-lambda').APIGatewayEvent } APIGatewayEvent */
 /** @typedef {import('aws-lambda').Context} Context */
 /** @typedef {import('aws-lambda').APIGatewayProxyResult} APIGatewayProxyResult */
-/** @typedef {import('../product.model').BodyCreate} BodyCreate   */
 
 import Ajv from "ajv"
+
+import { createOne } from "../product.db.js"
 import ProductSchema from "../product.schema.json" assert { type: "json" }
 import CreateOneReqValidationSchema from "./schema.js"
 
@@ -20,14 +21,14 @@ const validateRequestData = ajv.compile({
 })
 
 /**
- * Create and return a new Product
+ * Create a new Product
  *
  * @param {APIGatewayEvent} event
  * @param {Context} context
  *
  * @returns {Promise<APIGatewayProxyResult>}
  */
-export const createOne = async (event, context) => {
+export const handler = async (event, context) => {
   const body = JSON.parse(event.body || "{}")
 
   const isValid = validateRequestData({
@@ -47,18 +48,13 @@ export const createOne = async (event, context) => {
     }
   }
 
-  /** @type {BodyCreate} */
-  const product = {
-    name: body.name,
-    description: body.description,
-    price: body.price,
-  }
+  const result = await createOne(body)
 
   return {
     statusCode: 201,
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(product),
+    body: JSON.stringify(result),
   }
 }

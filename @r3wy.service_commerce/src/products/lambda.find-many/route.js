@@ -27,7 +27,7 @@ const validateRequestData = ajv.compile({
  *
  * @returns {Promise<APIGatewayProxyResult>}
  */
-export const findMany = async (event, context) => {
+export const handler = async (event, context) => {
   const isValid = validateRequestData({
     headers: event.headers,
     params: event.pathParameters,

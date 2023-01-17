@@ -1,39 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
-    "BodyCreate": {
-      "additionalProperties": false,
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "price": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "type": "object"
-    },
-    "BodyUpdate": {
-      "additionalProperties": false,
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "price": {
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
     "Fields": {
       "enum": [
         "id",
@@ -77,10 +44,41 @@
       },
       "required": [
         "id",
-        "name",
-        "createdAt",
-        "updatedAt"
+        "name"
       ],
+      "type": "object"
+    },
+    "ProductCreateInput": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "ProductUpdateInput": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        }
+      },
       "type": "object"
     }
   }

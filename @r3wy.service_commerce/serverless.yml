@@ -1,11 +1,10 @@
 service: r3wy-commerce
-
 frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: nodejs18.x
-  stage: ${opt:stage, "dev"}
+  stage: ${opt:stage, 'dev'}
   region: eu-central-1
   timeout: 5
   memorySize: 256
@@ -14,6 +13,8 @@ plugins:
   - serverless-prune-plugin
 
 custom:
+  products:
+    tableName: ${self:service}_${self:provider.stage}_products
   prune:
     automatic: true
     number: 3
@@ -30,20 +31,36 @@ package:
 
 functions:
   productsGetOne:
-    handler: src/products/lambda.get-one/route.getOne
+    handler: src/products/lambda.get-one/route.handler
     events:
       - httpApi:
           path: /products/{id}
           method: get
   productsFindMany:
-    handler: src/products/lambda.find-many/route.findMany
+    handler: src/products/lambda.find-many/route.handler
     events:
       - httpApi:
           path: /products
           method: get
   productsCreateOne:
-    handler: src/products/lambda.create-one/route.createOne
+    handler: src/products/lambda.create-one/route.handler
+    environment:
+      PRODUCTS_TABLE_NAME: ${self:custom.products.tableName}
     events:
       - httpApi:
           path: /products
           method: post
+
+resources:
+  Resources:
+    ProductsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.products.tableName}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST

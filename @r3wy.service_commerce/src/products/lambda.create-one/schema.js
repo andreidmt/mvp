@@ -8,18 +8,15 @@ export default {
       },
     },
   },
-
   params: {
     type: "object",
     additionalProperties: false,
   },
-
   query: {
     type: "object",
     additionalProperties: false,
   },
-
   body: {
-    $ref: "Product#/definitions/BodyCreate",
+    $ref: "Product#/definitions/ProductCreateInput",
   },
 }
