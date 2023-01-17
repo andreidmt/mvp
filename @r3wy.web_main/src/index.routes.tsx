@@ -36,7 +36,7 @@ export const AppRoutes: FC<AppRoutesProps> = () => (
     <Route
       path="/auth/oauth-return"
       element={
-        <GuestRoute isExclusive>
+        <GuestRoute isExclusive={true}>
           <AuthReturnPage />
         </GuestRoute>
       }

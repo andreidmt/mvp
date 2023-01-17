@@ -26,7 +26,7 @@ export const CardProduct: FC<CardProductProps> = ({
   name,
   price,
   rating,
-  thumbnailURL,
+  thumbnailURL = undefined,
 }) => (
   <Stack spacing="4">
     <Box position="relative">

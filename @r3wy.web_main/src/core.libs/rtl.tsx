@@ -26,5 +26,6 @@ const render: Render = (input, options = {}) =>
     ...options,
   })
 
+/* eslint-disable import/export */
 export * from "@testing-library/react"
 export { render }

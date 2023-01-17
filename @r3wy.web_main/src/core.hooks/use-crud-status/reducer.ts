@@ -17,7 +17,7 @@ export const EVENTS = {
   STOP: "STOP",
 } as const
 
-type DispatchPayload =
+export type DispatchPayload =
   | {
       type: typeof EVENTS.START
       payload: {

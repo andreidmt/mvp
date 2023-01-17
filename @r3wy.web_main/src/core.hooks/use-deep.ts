@@ -27,7 +27,7 @@ const debug = require("debug")("@r3wy:core.hooks/use-deep")
  * const userHash = useMemo(() => hash(user), [{...user}])
  */
 
-type UseMemo = <T>(fn: () => T, deps: any[]) => T
+export type UseMemo = <T>(fn: () => T, deps: any[]) => T
 
 export const useMemo: UseMemo = (fn, deps, isDebug = false) => {
   // The ref object is a generic container whose current property is mutable
@@ -50,7 +50,7 @@ export const useMemo: UseMemo = (fn, deps, isDebug = false) => {
  * Callback hook with deep equality check on dependency array.
  */
 
-type UseCallback = <T extends (...args: any[]) => any>(
+export type UseCallback = <T extends (...args: any[]) => any>(
   fn: T,
   deps: any[],
   isDebug?: boolean
@@ -74,7 +74,7 @@ export const useCallback: UseCallback = (fn, deps, isDebug = false) => {
  * Effect hook with deep equality check on dependency array.
  */
 
-type UseEffect = (fn: () => any, deps: any[], isDebug?: boolean) => void
+export type UseEffect = (fn: () => any, deps: any[], isDebug?: boolean) => void
 
 export const useEffect: UseEffect = (fn, deps, isDebug = false) => {
   const ref = useRef<typeof deps>([])

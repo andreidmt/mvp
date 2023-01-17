@@ -9,9 +9,9 @@ export type AvatarProps = {
 }
 
 export const Avatar: FC<AvatarProps> = ({
-  name,
-  avatarURL,
-  isSigningOut,
+  name = undefined,
+  avatarURL = undefined,
+  isSigningOut = false,
   signOut,
 }) => (
   <>

@@ -9,7 +9,9 @@ type ReviewsSectionProps = {
   productId?: string
 }
 
-export const ReviewsSection: FC<ReviewsSectionProps> = ({ productId }) => {
+export const ReviewsSection: FC<ReviewsSectionProps> = ({
+  productId = undefined,
+}) => {
   const [{ items }, { findAll }] = useReviews()
 
   useMount(() => {

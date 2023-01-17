@@ -1,5 +1,3 @@
-/** eslint env node */
-
 /** @typedef {import('webpack').Configuration} Configuration */
 /** @typedef {import('webpack-dev-server').Configuration} DevServerConfiguration */
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { StarIcon } from "@chakra-ui/icons"
 import { HStack, Icon, IconProps, StackProps } from "@chakra-ui/react"
 import { FC } from "react"
@@ -9,9 +10,12 @@ export type RatingProps = {
   rootProps?: StackProps
 }
 
-export const Rating: FC<RatingProps> = props => {
-  const { defaultValue = 0, max = 5, size = "md", rootProps } = props
-
+export const Rating: FC<RatingProps> = ({
+  defaultValue = 0,
+  max = 5,
+  size = "md",
+  rootProps = undefined,
+}) => {
   return (
     <HStack spacing="0.5" {...rootProps}>
       {Array.from({ length: max })

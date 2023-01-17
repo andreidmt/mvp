@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading, react/require-default-props */
 import {
   Link as ChakraLink,
   LinkProps as ChakraLinkProps,

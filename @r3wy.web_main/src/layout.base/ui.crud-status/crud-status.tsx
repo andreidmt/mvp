@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading, react/require-default-props */
 import { Flex, FlexProps, Spinner, Text } from "@chakra-ui/react"
 import { find, pipe, values } from "rambda"
 import { FC } from "react"
