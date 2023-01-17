@@ -36,6 +36,8 @@ module.exports = {
       version: "detect",
     },
 
+    "import/resolver": "webpack",
+
     /*
      * A list of regex strings that, if matched by a path, will not report
      * the matching module if no exports are found.

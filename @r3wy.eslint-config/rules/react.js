@@ -223,6 +223,7 @@ module.exports = {
     "react/require-default-props": [
       "error",
       {
+        functions: "defaultArguments",
         forbidDefaultForRequired: true,
       },
     ],
