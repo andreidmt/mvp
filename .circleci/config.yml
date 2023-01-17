@@ -225,10 +225,11 @@ jobs:
       - attach_workspace:
           at: *WORKSPACE_ROOT
       - run:
-          name: "[serverless] Deploy entire service"
+          name: "[serverless] Deploy service to AWS"
           command: |
             for dir in ./@r3wy.service_*; do
               cd "$dir"
+              ls -al
               npm run deploy;
               cd ..
             done
