@@ -222,11 +222,6 @@ jobs:
     executor: node
     working_directory: *JOB_WORKING_DIR
     steps:
-      - run:
-          name: "[yum] Install packages missing in 'amazon/aws-cli' image"
-          command: |
-            # tar, gzip: required for unpacking workspace data
-            yum install -y tar gzip zip
       - attach_workspace:
           at: *WORKSPACE_ROOT
       - run:
