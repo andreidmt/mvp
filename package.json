@@ -22,7 +22,7 @@
   "scripts": {
     "----UTIL": "",
     "prepare": "git config --local core.hooksPath .githooks",
-    "setup": "lerna bootstrap",
+    "setup": "npm ci && lerna bootstrap",
     "update": "ncu --deep --interactive",
     "format": "lerna run format",
     "----LINT": "",
