@@ -19,6 +19,28 @@ executors:
     docker:
       - image: cimg/node:18.13
 
+# Commands - https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-commands
+#
+# Reusable commands that can be invoked with parameters inside a job
+
+commands:
+  authenticate_github_npm:
+    description: "[bash] Authenticate to GitHub's npm registry"
+    parameters:
+      token:
+        type: string
+    steps:
+      - run:
+          name: "[bash] Avoid hosts unknown for github"
+          command: |
+            mkdir -p ~/.ssh/
+            echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+      - run:
+          name: "[bash] Append GitHub's npm registry auth data to root .npmrc"
+          command: |
+            echo "//npm.pkg.github.com/:_authToken=<< parameters.token >>" > ../.npmrc
+
+
 # Jobs - https://circleci.com/docs/2.0/configuration-reference/#jobs
 #
 # Atomic parts of the pipeline that will be composed and configured in one or
@@ -53,6 +75,8 @@ jobs:
           key:
             &CACHE_KEY_NODE_MODULES 'r3wy-v1-{{ arch }}-{{ checksum
             "package-lock.json" }}'
+      - authenticate_github_npm:
+          token: "$GITHUB_TOKEN"
       - run:
           name: "[lerna]: Install packages workspace wide"
           command: |
@@ -121,7 +145,8 @@ jobs:
           command: "npm run coverage"
 
   # Required:
-  #  - GITHUB_TOKEN
+  #  - GITHUB_TOKEN: @r3wy packages are private and require a GitHub token to
+  #                  install them
   #  - GIT_AUTHOR_EMAIL, GIT_AUTHOR_NAME
   #  - GIT_COMMITTER_EMAIL, GIT_COMMITTER_NAME
   release-npm:
@@ -133,15 +158,8 @@ jobs:
             - "33:c1:08:d6:95:3c:43:a5:96:ac:4a:9b:40:1a:0f:63"
       - attach_workspace:
           at: *WORKSPACE_ROOT
-      - run:
-          name: "[bash] Avoid hosts unknown for github"
-          command: |
-            mkdir -p ~/.ssh/
-            echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-      - run:
-          name: "[bash] Authenticate to GitHub's npm registry"
-          command: |
-            echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" > ../.npmrc
+      - authenticate_github_npm:
+          token: "$GITHUB_TOKEN"
       - run:
           name:
             "[lerna]: Update version, generate release, publish all non-private packages"
