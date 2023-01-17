@@ -33,11 +33,11 @@
     "rambda": "^7.4.0"
   },
   "devDependencies": {
-    "@r3wy/eslint-config": "^1.6.0",
+    "@r3wy/eslint-config": "^1.7.0",
     "@r3wy/prettier-config": "^1.4.0",
     "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/cypress-dotenv": "^2.0.0",
-    "@typescript-eslint/parser": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.2",
     "gherkin-lint": "^4.2.2",
     "node-polyfill-webpack-plugin": "2.0.1"
   },
