@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "extends": ["@r3wy/eslint-config/targets/node"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+  }
+}
