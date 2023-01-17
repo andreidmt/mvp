@@ -1,7 +1,25 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
-    "EditableFields": {
+    "BodyCreate": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "BodyUpdate": {
       "additionalProperties": false,
       "properties": {
         "description": {
@@ -16,12 +34,20 @@
       },
       "type": "object"
     },
-    "PluckableFields": {
+    "Fields": {
       "enum": [
         "id",
         "name",
         "description",
         "price",
+        "createdAt",
+        "updatedAt"
+      ],
+      "type": "string"
+    },
+    "FieldsGenerated": {
+      "enum": [
+        "id",
         "createdAt",
         "updatedAt"
       ],
@@ -52,8 +78,6 @@
       "required": [
         "id",
         "name",
-        "description",
-        "price",
         "createdAt",
         "updatedAt"
       ],

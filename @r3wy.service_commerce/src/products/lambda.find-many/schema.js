@@ -21,7 +21,7 @@ export default {
       pluck: {
         type: "array",
         items: {
-          $ref: "Product#/definitions/PluckableFields",
+          $ref: "Product#/definitions/Fields",
         },
         uniqueItems: true,
         default: [],

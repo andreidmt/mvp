@@ -22,11 +22,11 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "----BUILD": "",
-    "build.carts-schemas": "ts-json-schema-generator --no-type-check --path 'src/model.carts/model.ts' --out 'src/model.carts/schema.json'",
-    "build.products-schemas": "ts-json-schema-generator --no-type-check --path 'src/model.products/model.ts' --out 'src/model.products/schema.json'",
+    "build.carts-schemas": "ts-json-schema-generator --no-type-check --path 'src/carts/cart.model.ts' --out 'src/carts/cart.schema.json'",
+    "build.products-schemas": "ts-json-schema-generator --no-type-check --path 'src/products/product.model.ts' --out 'src/products/product.schema.json'",
     "build.schemas": "npm run build.carts-schemas && npm run build.products-schemas",
     "----DEPLOY": "",
-    "predeploy": "npm ci && npm run build.schemas",
+    "predeploy": "npm run build.schemas",
     "deploy": "serverless deploy --verbose"
   },
   "dependencies": {

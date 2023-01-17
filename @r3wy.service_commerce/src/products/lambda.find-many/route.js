@@ -1,10 +1,10 @@
 /** @typedef {import('aws-lambda').APIGatewayEvent } APIGatewayEvent */
 /** @typedef {import('aws-lambda').Context} Context */
 /** @typedef {import('aws-lambda').APIGatewayProxyResult} APIGatewayProxyResult */
-/** @typedef {import('../model').Product} Product */
+/** @typedef {import('../product.model').Product} Product */
 
 import Ajv from "ajv"
-import ProductSchema from "../schema.json" assert { type: "json" }
+import ProductSchema from "../product.schema.json" assert { type: "json" }
 import FindManyReqValidationSchema from "./schema.js"
 
 /*
@@ -37,7 +37,7 @@ export const findMany = async (event, context) => {
 
   if (!isValid) {
     return {
-      statusCode: 400,
+      statusCode: 409,
       body: JSON.stringify(validateRequestData.errors),
     }
   }

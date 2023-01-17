@@ -30,14 +30,20 @@ package:
 
 functions:
   productsGetOne:
-    handler: src/model.products/lambda.get-one/route.getOne
+    handler: src/products/lambda.get-one/route.getOne
     events:
       - httpApi:
           path: /products/{id}
           method: get
   productsFindMany:
-    handler: src/model.products/lambda.find-many/route.findMany
+    handler: src/products/lambda.find-many/route.findMany
     events:
       - httpApi:
           path: /products
           method: get
+  productsCreateOne:
+    handler: src/products/lambda.create-one/route.createOne
+    events:
+      - httpApi:
+          path: /products
+          method: post
