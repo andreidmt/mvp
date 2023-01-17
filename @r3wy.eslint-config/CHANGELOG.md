@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.0](https://github.com/r3wy/r3wy/compare/@r3wy/eslint-config@1.7.0...@r3wy/eslint-config@1.8.0) (2023-01-17)
+
+### Features
+
+- use webpack import resolver
+  ([181a294](https://github.com/r3wy/r3wy/commit/181a294516c64fd96c5df971f3cddb9d53e4f4f3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.7.0](https://github.com/r3wy/r3wy/compare/@r3wy/eslint-config@1.6.0...@r3wy/eslint-config@1.7.0) (2023-01-16)
 
 ### Features
