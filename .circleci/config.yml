@@ -229,7 +229,7 @@ jobs:
           command: |
             for dir in ./@r3wy.service_*; do
               cd "$dir"
-              ls -al
+              echo "Deploying \"$dir\""
               npm run deploy;
               cd ..
             done
