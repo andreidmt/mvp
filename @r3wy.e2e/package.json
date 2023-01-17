@@ -33,7 +33,7 @@
     "rambda": "^7.4.0"
   },
   "devDependencies": {
-    "@r3wy/eslint-config": "^1.7.0",
+    "@r3wy/eslint-config": "^1.8.0",
     "@r3wy/prettier-config": "^1.4.0",
     "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/cypress-dotenv": "^2.0.0",
