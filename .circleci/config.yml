@@ -62,8 +62,7 @@ jobs:
             - r3wy
 
   # Required:
-  #  - GITHUB_TOKEN: @r3wy packages are private and require a GitHub token to
-  #                  install them
+  #  - GITHUB_TOKEN: @r3wy packages are private and require a GitHub for install
   setup:
     executor: node
     working_directory: *JOB_WORKING_DIR
@@ -145,8 +144,7 @@ jobs:
           command: "npm run coverage"
 
   # Required:
-  #  - GITHUB_TOKEN: @r3wy packages are private and require a GitHub token to
-  #                  install them
+  #  - GITHUB_TOKEN: @r3wy packages are private and require a GitHub for install
   #  - GIT_AUTHOR_EMAIL, GIT_AUTHOR_NAME
   #  - GIT_COMMITTER_EMAIL, GIT_COMMITTER_NAME
   release-npm:
@@ -216,6 +214,7 @@ jobs:
               --cache-control "no-cache"
 
   # Required:
+  #  - GITHUB_TOKEN: @r3wy packages are private and require a GitHub for install
   #  - AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY: `aws-cli` auth
   #  - AWS_REGION: Region lambda functions get deployed to
   deploy-services:
@@ -224,6 +223,8 @@ jobs:
     steps:
       - attach_workspace:
           at: *WORKSPACE_ROOT
+      - authenticate_github_npm:
+          token: "$GITHUB_TOKEN"
       - run:
           name: "[serverless] Deploy service to AWS"
           command: |
@@ -265,6 +266,7 @@ workflows:
       - deploy-services:
           requires: [release-npm]
           context:
+            - "R3wy - GitHub"
             - "R3wy - AWS @andreidmt"
       - deploy-react:
           requires: [build-react]
