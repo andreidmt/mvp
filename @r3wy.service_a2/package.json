@@ -24,7 +24,7 @@
     "----BUILD": "",
     "build.schemas": "echo \"TBD\"",
     "----DEPLOY": "",
-    "predeploy": "npm ci && npm run build.schemas",
+    "predeploy": "npm run build.schemas",
     "deploy": "serverless deploy --verbose"
   },
   "dependencies": {
