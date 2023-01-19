@@ -1,8 +1,0 @@
-{
-  "name": "@r3wy/core",
-  "version": "1.0.0",
-  "description": "R3wy's core with domain specific data",
-  "private": true,
-  "scripts": {
-  }
-}
