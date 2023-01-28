@@ -48,6 +48,7 @@ coverage
 benchmark
 
 # Build
+.esbuild
 dist
 dist-*
 
