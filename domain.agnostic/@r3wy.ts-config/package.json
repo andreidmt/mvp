@@ -1,7 +1,7 @@
 {
-  "name": "@r3wy/react-hooks",
+  "name": "@r3wy/ts-config",
   "version": "1.0.0",
-  "description": "R3wy's general purpose React hooks",
+  "description": "R3wy's Typescript config",
   "author": "Andrei Dumitrescu <andrei.dumitrescu@pm.me>",
   "repository": {
     "type": "git",
@@ -11,9 +11,5 @@
     "registry": "https://npm.pkg.github.com/r3wy",
     "access": "public"
   },
-  "exports": "./dist/index.js",
-  "scripts": {},
-  "peerDependencies": {
-    "react": "17||18"
-  }
+  "scripts": {}
 }

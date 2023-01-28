@@ -12,6 +12,7 @@
   },
   "scripts": {
     "----UTIL": "",
+    "setup": "npm ci --prefer-offline --no-audit",
     "format": "eslint --fix .",
     "----LINT": "",
     "lint.js": "eslint --quiet .",
@@ -41,5 +42,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-testing-library": "^5.9.1",
     "eslint-plugin-unicorn": "^45.0.2"
+  },
+  "peerDependencies": {
+    "eslint": "^8.5.0"
   }
 }

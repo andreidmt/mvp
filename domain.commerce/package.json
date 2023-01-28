@@ -5,7 +5,8 @@
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/r3wy/r3wy.git"
+    "url": "git+https://github.com/r3wy/r3wy.git",
+    "directory": "domain.commerce"
   },
   "type": "module",
   "exports": "./src/index.js",
@@ -14,9 +15,11 @@
   ],
   "scripts": {
     "----UTIL": "",
+    "setup.reset": "rm -rf node_modules && rm -rf package-lock.json & npm i",
+    "setup": "npm ci --prefer-offline --no-audit",
     "update": "ncu --interactive",
     "----LINT": "",
-    "lint": "eslint src",
+    "lint": "eslint .",
     "typecheck": "tsc --pretty --noEmit",
     "----TEST": "",
     "test": "jest --coverage",
@@ -29,22 +32,27 @@
     "predeploy": "npm run build.schemas",
     "deploy": "serverless deploy --verbose"
   },
+  "bundledDependencies": true,
   "dependencies": {
     "ajv": "^8.12.0",
-    "aws-sdk": "^2.1296.0",
+    "aws-sdk": "^2.1299.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@r3wy/eslint-config": "^1.8.0",
     "@r3wy/prettier-config": "^1.4.0",
-    "@types/aws-lambda": "^8.10.109",
-    "aws-lambda": "^1.0.7",
-    "serverless": "^3.26.0",
+    "@types/uuid": "^9.0.0",
+    "serverless-jetpack": "^0.11.1",
     "serverless-prune-plugin": "^2.0.1",
     "ts-json-schema-generator": "^1.2.0"
   },
   "engines": {
     "node": ">=18",
     "npm": ">=8"
-  }
+  },
+  "bundleDependencies": [
+    "ajv",
+    "aws-sdk",
+    "uuid"
+  ]
 }

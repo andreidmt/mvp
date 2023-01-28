@@ -1,7 +1,6 @@
 module.exports = {
   plugins: ["prettier"],
   extends: ["plugin:prettier/recommended"],
-
   rules: {
     /**
      * If a block (for example after if, else, for or while) contains only one

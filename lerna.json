@@ -8,8 +8,8 @@
     "domain.auth",
     "domain.cms",
     "domain.commerce",
-    "domain.client-web/*",
-    "domain.client-heartbeat"
+    "client.web/*",
+    "client.heartbeat"
   ],
   "command": {
     "version": {

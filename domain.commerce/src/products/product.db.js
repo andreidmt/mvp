@@ -1,8 +1,12 @@
+import AWS from "aws-sdk"
+import { v4 as uuid } from "uuid"
+
 /** @typedef {import('./product.model').Product} Product */
 /** @typedef {import('./product.model').ProductCreateInput} ProductCreateInput */
 
-import AWS from "aws-sdk"
-import { v4 as uuid } from "uuid"
+
+
+
 
 const dynamodb = new AWS.DynamoDB.DocumentClient()
 
