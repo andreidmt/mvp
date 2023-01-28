@@ -1,9 +1,16 @@
 {
-  "useWorkspaces": true,
   "version": "independent",
   "changelogPreset": {
     "name": "conventionalcommits"
   },
+  "packages": [
+    "domain.agnostic/*",
+    "domain.auth",
+    "domain.cms",
+    "domain.commerce",
+    "domain.client-web/*",
+    "domain.client-heartbeat"
+  ],
   "command": {
     "version": {
       "allowBranch": "main",
