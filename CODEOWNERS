@@ -1,0 +1,7 @@
+!domain.*               *
+domain.agnostic         *
+domain.commerce         @team-commerce
+domain.auth             @team-auth
+domain.cms              @team-cms
+domain.client-web       @team-client-web
+domain.client-heartbeat @team-client-heartbeat
