@@ -80,18 +80,6 @@ jobs:
           name: "[lerna]: Install packages workspace wide"
           command: |
             npm run setup
-      - run:
-          name: "[npm]: Install packages in each lambda function"
-          command: |
-            # "@r3wy.service_*" folders are not part of the workspace since
-            # npm workspaces does not support --nohoist (yet?). We need packages
-            # installed localy, without hoisting, because lambdas need to
-            # deploy with their dependencies.
-            for dir in ./@r3wy.service_*; do
-              cd "$dir"
-              npm ci;
-              cd ..
-            done
       - save_cache:
           paths:
             - node_modules
