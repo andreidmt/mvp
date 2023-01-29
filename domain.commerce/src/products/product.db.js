@@ -4,10 +4,6 @@ import { v4 as uuid } from "uuid"
 /** @typedef {import('./product.model').Product} Product */
 /** @typedef {import('./product.model').ProductCreateInput} ProductCreateInput */
 
-
-
-
-
 const dynamodb = new AWS.DynamoDB.DocumentClient()
 
 /**
@@ -19,7 +15,8 @@ const dynamodb = new AWS.DynamoDB.DocumentClient()
  */
 export const createOne = async ({ name, description, price }) => {
   const now = new Date().toISOString()
-  const dbItem = await dynamodb
+
+  return dynamodb
     .put({
       TableName: process.env.PRODUCTS_TABLE_NAME ?? "",
       Item: {
@@ -32,6 +29,5 @@ export const createOne = async ({ name, description, price }) => {
       },
     })
     .promise()
-
-  return dbItem.$response.data
+    .then(dbResult => /** @type {Product} */ (dbResult.$response.data))
 }

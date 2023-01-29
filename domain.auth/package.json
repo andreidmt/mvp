@@ -33,6 +33,8 @@
   "devDependencies": {
     "@r3wy/eslint-config": "^1.8.0",
     "@r3wy/prettier-config": "^1.4.0",
+    "@types/aws-lambda": "^8.10.110",
+    "aws-lambda": "^1.0.7",
     "serverless-prune-plugin": "^2.0.1",
     "ts-json-schema-generator": "^1.2.0"
   },

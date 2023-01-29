@@ -1,5 +1,5 @@
 {
-  "name": "@r3wy/e2e",
+  "name": "@r3wy/client-main.react-e2e",
   "version": "1.0.0",
   "description": "R3wy's Cypress E2E tests",
   "private": true,
@@ -27,7 +27,7 @@
     "@cypress/webpack-preprocessor": "^5.16.1",
     "@swc/helpers": "^0.4.14",
     "@testing-library/cypress": "^9.0.0",
-    "cypress": "^12.3.0",
+    "cypress": "^12.4.1",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-dotenv": "^2.0.0",
     "rambda": "^7.4.0"
@@ -37,8 +37,9 @@
     "@r3wy/prettier-config": "^1.4.0",
     "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/cypress-dotenv": "^2.0.0",
-    "@typescript-eslint/parser": "^5.48.2",
+    "@typescript-eslint/parser": "^5.49.0",
     "gherkin-lint": "^4.2.2",
+    "jest": "^29.4.1",
     "node-polyfill-webpack-plugin": "2.0.1"
   },
   "cypress-cucumber-preprocessor": {

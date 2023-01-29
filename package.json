@@ -17,10 +17,10 @@
   "scripts": {
     "----UTIL": "",
     "prepare": "git config --local core.hooksPath .githooks",
-    "setup": "npm i && lerna bootstrap",
-    "setup.fresh": "rm -rf node_modules && rm package-lock.json && npm run setup",
+    "setup": "npm ci && lerna exec --parallel -- npm ci --prefer-offline --no-audit",
+    "setup.reset": "npm i && lerna exec --parallel -- npm i",
     "update": "ncu --interactive",
-    "update.view-children": "ncu --deep",
+    "update.all": "ncu --interactive --deep",
     "format": "prettier --write .",
     "----LINT": "",
     "lint": "lerna run lint",
