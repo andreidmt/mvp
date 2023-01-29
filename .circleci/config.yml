@@ -69,21 +69,12 @@ jobs:
     steps:
       - attach_workspace:
           at: *WORKSPACE_ROOT
-      - restore_cache:
-          name: '[circleci] Restore cached "node_modules" folder'
-          key:
-            &CACHE_KEY_NODE_MODULES 'r3wy-v1-{{ arch }}-{{ checksum
-            "package-lock.json" }}'
       - authenticate_github_npm:
           token: "$GITHUB_TOKEN"
       - run:
           name: "[lerna]: Install packages workspace wide"
           command: |
             npm run setup
-      - save_cache:
-          paths:
-            - node_modules
-          key: *CACHE_KEY_NODE_MODULES
       - persist_to_workspace:
           root: *WORKSPACE_ROOT
           paths:
